@@ -1,0 +1,3575 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- <link rel="stylesheet" href="./index.css" /> -->
+    <title>food</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        /* box-sizing: border-box; */
+      }
+
+      /* body {
+            background-color: rgba(0, 0, 0, 0.938);
+            background-color: #23E3C9;
+            overflow: hidden;
+        } */
+
+      .main-wrapper {
+        /* max-width: 1440px; */
+        margin: auto;
+        /* display: flex; */
+        /* align-items: flex-start; */
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .slider-wrapper {
+        width: 50%;
+        height: 500px;
+        /* display: flex; */
+        /* align-items: center; */
+
+        position: absolute;
+        left: 3vw;
+
+        margin: auto;
+        overflow: hidden;
+      }
+
+      .slides {
+        width: 100%;
+        position: absolute;
+        transition: transform 0.4s ease-in-out;
+      }
+
+      .slides img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0.3rem;
+      }
+
+      .slider-btns {
+        position: absolute;
+        top: 50%;
+        left: 3vw;
+        z-index: 2;
+        width: 100;
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .slider-btns span {
+        padding: 1rem 1.2rem;
+        font-size: 1.5rem;
+        background: rgba(255, 255, 255, 0.151);
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+      }
+
+      .dots {
+        position: absolute;
+        width: 100%;
+        top: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        z-index: 10000;
+      }
+
+      .dots .dot {
+        width: 1rem;
+        height: 1rem;
+        background-color: white;
+        opacity: 0.2;
+        border-radius: 50%;
+        transition: opacity 0.2s ease-in-out;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 950px) {
+        .slider-wrapper {
+          width: 70%;
+        }
+      }
+
+      @media screen and (max-width: 680px) {
+        .slider-wrapper {
+          width: 90%;
+        }
+      }
+
+      /* .dropdown {
+            position: absolute;
+            top: 17vh;
+            right: 20vw;
+        }
+
+        .dropdown select {
+            padding: 10px;
+            font-size: 16px;
+        } */
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 1.4;
+        color: #fff;
+        background-color: #1f2029;
+        overflow-x: hidden;
+        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg");
+        background-position: center;
+        background-repeat: repeat;
+        background-size: 4%;
+        width: 100%;
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-pack: center;
+        /* justify-content: center; */
+        padding-top: 100px;
+        padding-bottom: 300px;
+      }
+
+      .sec-center {
+        position: relative;
+        max-width: 100%;
+        text-align: center;
+        z-index: 200;
+        margin: 0 auto 0 auto;
+        height: 60px;
+      }
+
+      /* [type="checkbox"]:checked,
+      [type="checkbox"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+        pointer-events: none;
+      } */
+
+      .dark-light:checked + label,
+      .dark-light:not(:checked) + label {
+        position: fixed;
+        top: 40px;
+        right: 40px;
+        z-index: 20000;
+        display: block;
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        cursor: pointer;
+        transition: all 200ms linear;
+        box-shadow: 0 0 25px rgba(255, 235, 167, 0.45);
+      }
+
+      .dark-light:checked + label {
+        transform: rotate(360deg);
+      }
+
+      .dark-light:checked + label:after,
+      .dark-light:not(:checked) + label:after {
+        position: absolute;
+        content: "";
+        top: 1px;
+        left: 1px;
+        overflow: hidden;
+        z-index: 2;
+        display: block;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        background-color: #102770;
+        background-image: url("https://assets.codepen.io/1462889/moon.svg");
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: all 200ms linear;
+        opacity: 0;
+      }
+
+      .dark-light:checked + label:after {
+        opacity: 1;
+      }
+
+      .dark-light:checked + label:before,
+      .dark-light:not(:checked) + label:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: 1;
+        display: block;
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        background-color: #48dbfb;
+        background-image: url("https://assets.codepen.io/1462889/sun.svg");
+        background-size: 25px 25px;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: all 200ms linear;
+      }
+
+      .dark-light:checked + label:before {
+        background-color: #000;
+      }
+
+      .light-back {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -999999;
+        background-color: #fff;
+        overflow: hidden;
+        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg");
+        background-position: center;
+        background-repeat: repeat;
+        background-size: 4%;
+        height: 100%;
+        width: 100%;
+        transition: all 200ms linear;
+        opacity: 0;
+      }
+
+      .dark-light:checked ~ .light-back {
+        opacity: 1;
+      }
+
+      .dropdown:checked + label,
+      .dropdown:not(:checked) + label {
+        position: relative;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 2;
+        height: 60px;
+        transition: all 200ms linear;
+        border-radius: 4px;
+        width: 220px;
+        letter-spacing: 1px;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        justify-content: center;
+        -ms-flex-pack: center;
+        text-align: center;
+        border: none;
+        background-color: #ffeba7;
+        cursor: pointer;
+        color: #102770;
+        box-shadow: 0 12px 35px 0 rgba(255, 235, 167, 0.15);
+      }
+
+      .dark-light:checked ~ .sec-center .for-dropdown {
+        background-color: #102770;
+        color: #ffeba7;
+        box-shadow: 0 12px 35px 0 rgba(16, 39, 112, 0.25);
+      }
+
+      .dropdown:checked + label:before,
+      .dropdown:not(:checked) + label:before {
+        position: fixed;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        cursor: auto;
+        pointer-events: none;
+      }
+
+      .dropdown:checked + label:before {
+        pointer-events: auto;
+      }
+
+      .dropdown:not(:checked) + label .uil {
+        font-size: 24px;
+        margin-left: 10px;
+        transition: transform 200ms linear;
+      }
+
+      .dropdown:checked + label .uil {
+        transform: rotate(180deg);
+        font-size: 24px;
+        margin-left: 10px;
+        transition: transform 200ms linear;
+      }
+
+      .section-dropdown {
+        position: absolute;
+        padding: 5px;
+        background-color: #111;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        border-radius: 4px;
+        display: block;
+        box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.4);
+        z-index: 2;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition: all 200ms linear;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown {
+        background-color: #fff;
+        box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.15);
+      }
+
+      .dropdown:checked ~ .section-dropdown {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .section-dropdown:before {
+        position: absolute;
+        top: -20px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        content: "";
+        display: block;
+        z-index: 1;
+      }
+
+      .section-dropdown:after {
+        position: absolute;
+        top: -7px;
+        left: 30px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #111;
+        content: "";
+        display: block;
+        z-index: 2;
+        transition: all 200ms linear;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown:after {
+        border-bottom: 8px solid #fff;
+      }
+
+      .section-dropdown a {
+        position: relative;
+        color: #fff;
+        transition: all 200ms linear;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        border-radius: 2px;
+        padding: 5px 0;
+        padding-left: 20px;
+        padding-right: 15px;
+        margin: 2px 0;
+        text-align: left;
+        text-decoration: none;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        justify-content: space-between;
+        -ms-flex-pack: distribute;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown a {
+        color: #102770;
+      }
+
+      .section-dropdown a:hover {
+        color: #102770;
+        background-color: #ffeba7;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown a:hover {
+        color: #ffeba7;
+        background-color: #102770;
+      }
+
+      .section-dropdown a .uil {
+        font-size: 22px;
+      }
+
+      .dropdown-sub:checked + label,
+      .dropdown-sub:not(:checked) + label {
+        position: relative;
+        color: #fff;
+        transition: all 200ms linear;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        border-radius: 2px;
+        padding: 5px 0;
+        padding-left: 20px;
+        padding-right: 15px;
+        text-align: left;
+        text-decoration: none;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        justify-content: space-between;
+        -ms-flex-pack: distribute;
+        cursor: pointer;
+      }
+
+      .dropdown-sub:checked + label .uil,
+      .dropdown-sub:not(:checked) + label .uil {
+        font-size: 22px;
+      }
+
+      .dropdown-sub:not(:checked) + label .uil {
+        transition: transform 200ms linear;
+      }
+
+      .dropdown-sub:checked + label .uil {
+        transform: rotate(135deg);
+        transition: transform 200ms linear;
+      }
+
+      .dropdown-sub:checked + label:hover,
+      .dropdown-sub:not(:checked) + label:hover {
+        color: #102770;
+        background-color: #ffeba7;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub {
+        color: #102770;
+      }
+
+      .dark-light:checked
+        ~ .sec-center
+        .section-dropdown
+        .for-dropdown-sub:hover {
+        color: #ffeba7;
+        background-color: #102770;
+      }
+
+      .section-dropdown-sub {
+        position: relative;
+        display: block;
+        width: 100%;
+        pointer-events: none;
+        opacity: 0;
+        max-height: 0;
+        padding-left: 10px;
+        padding-right: 3px;
+        overflow: hidden;
+        transition: all 200ms linear;
+      }
+
+      .dropdown-sub:checked ~ .section-dropdown-sub {
+        pointer-events: auto;
+        opacity: 1;
+        max-height: 999px;
+      }
+
+      .section-dropdown-sub a {
+        font-size: 14px;
+      }
+
+      .section-dropdown-sub a .uil {
+        font-size: 20px;
+      }
+
+      .logo {
+        position: fixed;
+        top: 50px;
+        left: 40px;
+        display: block;
+        z-index: 11000000;
+        background-color: transparent;
+        border-radius: 0;
+        padding: 0;
+        transition: all 250ms linear;
+      }
+
+      .logo:hover {
+        background-color: transparent;
+      }
+
+      .logo img {
+        height: 26px;
+        width: auto;
+        display: block;
+        transition: all 200ms linear;
+      }
+
+      .dark-light:checked ~ .logo img {
+        filter: brightness(10%);
+      }
+
+      @media screen and (max-width: 991px) {
+        .logo {
+          top: 30px;
+          left: 20px;
+        }
+
+        .dark-light:checked + label,
+        .dark-light:not(:checked) + label {
+          top: 20px;
+          right: 20px;
+        }
+      }
+    </style>
+
+    <style>
+      /* @import url(//codepen.io/chrisdothtml/pen/ojLzJK.css); */
+
+      /* Reset */
+      /* Main Styles */
+      .button {
+        display: block;
+        background-color: #c0392b;
+        width: 150px;
+        height: 60px;
+        line-height: 60px;
+        /* margin: auto; */
+        color: #fff;
+        position: absolute;
+        /* top: 0; */
+        /* bottom: 50%; */
+        /* left: 0; */
+        right: 3%;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+        transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+        z-index: 10000;
+      }
+
+      .button span,
+      .button .icon {
+        display: block;
+        height: 100%;
+        text-align: center;
+        position: absolute;
+        top: 0;
+      }
+
+      .button span {
+        width: 72%;
+        line-height: inherit;
+        font-size: 22px;
+        text-transform: uppercase;
+        left: 0;
+        transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+      }
+
+      .button span:after {
+        content: "";
+        background-color: #a53125;
+        width: 2px;
+        height: 70%;
+        position: absolute;
+        top: 15%;
+        right: -1px;
+      }
+
+      .button .icon {
+        width: 28%;
+        right: 0;
+        transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+      }
+
+      .button .icon .fa {
+        font-size: 30px;
+        vertical-align: middle;
+        transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4),
+          height 0.25s ease;
+      }
+
+      .button .icon .fa-remove {
+        height: 36px;
+      }
+
+      .button .icon .fa-check {
+        display: none;
+      }
+
+      .button.success span,
+      .button:hover span {
+        left: -72%;
+        opacity: 0;
+      }
+
+      .button.success .icon,
+      .button:hover .icon {
+        width: 100%;
+      }
+
+      .button.success .icon .fa,
+      .button:hover .icon .fa {
+        font-size: 45px;
+      }
+
+      .button.success {
+        background-color: #27ae60;
+      }
+
+      .button.success .icon .fa-remove {
+        display: none;
+      }
+
+      .button.success .icon .fa-check {
+        display: inline-block;
+      }
+
+      .button:hover {
+        opacity: 0.9;
+      }
+
+      .button:hover .icon .fa-remove {
+        height: 46px;
+      }
+
+      .button:active {
+        opacity: 1;
+      }
+
+      #filters {
+        width: 291px;
+        position: absolute;
+        /* left: 783px; */
+        /* top: 177px; */
+        right: 15vw;
+        top: 30vh;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-btn {
+        padding: 10px;
+        background-color: #f1f1f1;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: #333;
+        transition: background-color 0.3s ease;
+        margin: 10px;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 10px;
+        z-index: 1;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        color: #333;
+        min-width: 200px;
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+      }
+
+      .dropdown-content label {
+        display: block;
+        margin-bottom: 8px;
+        cursor: pointer;
+      }
+
+      .dropdown-content label:last-child {
+        margin-bottom: 0;
+      }
+
+      .dropdown-content label:hover {
+        background-color: #f9f9f9;
+      }
+
+      .dropdown-content label input[type="checkbox"] {
+        margin-right: 5px;
+      }
+
+      .dropdown-btn:hover {
+        background-color: #e6e6e6;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+    </style>
+    <style>
+      @media screen and (max-width: 991px) {
+        .main-wrapper {
+          display: flex;
+          /* flex-direction: column;
+                    justify-content: center;
+                    align-items: center; */
+        }
+
+        .slider-btns {
+          position: absolute;
+          left: 20vw;
+        }
+
+        .sec-center {
+          position: absolute;
+          bottom: 0;
+          left: 1%;
+        }
+
+        .button {
+          position: absolute;
+          bottom: 0;
+        }
+
+        .filters {
+          margin-top: 80vh;
+        }
+
+        #GO {
+          top: 50vh;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main-wrapper">
+      <div class="slider-btns">
+        <span id="prev-btn"><i class="fa-solid fa-chevron-left"></i></span>
+        <span id="next-btn"><i class="fa-solid fa-angle-right"></i></span>
+      </div>
+      <div class="slider-wrapper">
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="slides">
+          <img
+            src="https://source.unsplash.com/random/?ecommerce,electronics sale,gadgets sale"
+            alt=""
+          />
+        </div>
+        <div class="slides">
+          <img
+            src="https://source.unsplash.com/random/?smartphone sale in amazon flipkart"
+            alt=""
+          />
+        </div>
+        <div class="slides">
+          <img
+            src="https://source.unsplash.com/random/?laptop sale, tv sale"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="dropdown">
+        <select>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </div> -->
+
+    <input
+      class="dark-light"
+      type="checkbox"
+      id="dark-light"
+      name="dark-light"
+      style="
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+        pointer-events: none;
+      "
+    />
+    <label for="dark-light"></label>
+
+    <div class="light-back"></div>
+
+    <!-- <a href="https://front.codes/" class="logo" target="_blank">
+        <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+    </a> -->
+
+    <div class="sec-center">
+      <input
+        class="dropdown"
+        type="checkbox"
+        id="dropdown"
+        name="dropdown"
+        style="
+          position: absolute;
+          left: -9999px;
+          opacity: 0;
+          pointer-events: none;
+        "
+      />
+      <label class="for-dropdown" id="for-dropdown" for="dropdown"
+        >Food Items <i class="uil uil-arrow-down"></i
+      ></label>
+      <div class="section-dropdown" id="section-dropdown">
+        <a href="#" id="1" onclick="change_text(this.id)"
+          >Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <!-- <input class="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub" />
+            <label class="for-dropdown-sub" for="dropdown-sub">Dropdown Sub <i class="uil uil-plus"></i></label>
+            <div class="section-dropdown-sub">
+                <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
+                <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
+            </div> -->
+        <a href="#" id="2" onclick="change_text(this.id)"
+          >Cameras & Photography <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="3" onclick="change_text(this.id)"
+          >Car & Vehicle Electronics <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="4" onclick="change_text(this.id)"
+          >Computers & Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="5" onclick="change_text(this.id)"
+          >GPS & Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="6" onclick="change_text(this.id)"
+          >Home Audio<i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="7" onclick="change_text(this.id)"
+          >Home Theater, TV & Video <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="8" onclick="change_text(this.id)"
+          >Mobiles & Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="9" onclick="change_text(this.id)"
+          >Portable Media Players <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="10" onclick="change_text(this.id)"
+          >Radio Communication <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="11" onclick="change_text(this.id)"
+          >Tablets <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="12" onclick="change_text(this.id)"
+          >Telephones & Accessories<i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="13" onclick="change_text(this.id)"
+          >Laptops <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="14" onclick="change_text(this.id)"
+          >eBook Readers & Accessories<i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="15" onclick="change_text(this.id)"
+          >Wearable Technology <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="16" onclick="change_text(this.id)"
+          >General Purpose Batteries & Battery Chargers
+          <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="17" onclick="change_text(this.id)"
+          >Headphones, Earbuds & Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="18" onclick="change_text(this.id)"
+          >Movies <i class="uil uil-arrow-right"></i
+        ></a>
+      </div>
+    </div>
+
+    <a class="button" href="#" role="button" onclick="clear_selected()">
+      <span>Clear</span>
+      <div class="icon">
+        <i class="fa fa-remove"></i>
+        <i class="fa fa-check"></i>
+      </div>
+    </a>
+
+    <div id="filters" class="filters"></div>
+  </body>
+  <script>
+    const slides = document.querySelectorAll(".slides");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const dots = document.querySelectorAll(".dot");
+
+    let index = 0;
+
+    // Adding opacity to first dot on first time
+
+    dots[0].style.opacity = "1";
+
+    // positioning the slides
+
+    slides.forEach((slide, index) => {
+      slide.style.left = `${index * 100}%`;
+    });
+
+    // move slide function
+
+    const moveSlide = () => {
+      slides.forEach((slide) => {
+        slide.style.transform = `translateX(-${index * 100}%)`;
+      });
+    };
+
+    // remove dots opacity 1 from all dots
+
+    const removeDotsOpacity = () => {
+      dots.forEach((dot) => {
+        dot.style.opacity = ".2";
+      });
+    };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", (e) => {
+        index = i;
+        removeDotsOpacity();
+        e.target.style.opacity = "1";
+        moveSlide();
+      });
+    });
+
+    // show the previous slide
+
+    prevBtn.addEventListener("click", () => {
+      if (index === 0) return index;
+      index--;
+      removeDotsOpacity();
+      dots[index].style.opacity = "1";
+      moveSlide();
+    });
+
+    // show the next slide
+
+    nextBtn.addEventListener("click", () => {
+      if (index === slides.length - 1) return index;
+      index++;
+      removeDotsOpacity();
+      dots[index].style.opacity = "1";
+      moveSlide();
+    });
+
+    // auto play slide
+
+    const autoPlaySlide = () => {
+      removeDotsOpacity();
+      if (index === slides.length - 1) index = -1;
+      index++;
+      dots[index].style.opacity = "1";
+      moveSlide();
+    };
+
+    window.onload = () => {
+      setInterval(autoPlaySlide, 6000);
+    };
+  </script>
+
+  <script>
+    const filters_element = {
+      1: [
+        { "Augmented Reality": ["View In Your Room", "Virtual Try-On"] },
+        { "Amazon Certified": ["Auto Replenishment", "Works with Alexa"] },
+        { "From Our Brands": ["Amazon Brands"] },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        { "New Arrivals": ["New Arrivals", "Coming Soon"] },
+        { Certification: ["Energy Star"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+      2: [
+        {
+          "Included Components": [
+            "Camera Body & Accessories",
+            "Camera Body & Lens",
+            "Camera Body Only",
+            "Camera Kit",
+          ],
+        },
+        { "Skill Level": ["Amateur", "Novice", "Professional"] },
+        {
+          "Camera & Camcorder Lens Zoom Type": ["Digital Zoom", "Optical Zoom"],
+        },
+        { "Point & Shoot Camera Size": ["Compact", "Large Sensor Compact"] },
+        {
+          "Camera Sensor Effective Megapixels": [
+            "Up to 9.9 MP",
+            "10 to 14.9 MP",
+            "15 to 19.9 MP",
+            "20 to 24.9 MP",
+            "25 to 29.9 MP",
+            "30 to 39.9 MP",
+            "40 MP & Above",
+          ],
+        },
+        {
+          "Camera Photo Sensor Size": [
+            "Full Frame",
+            "APS-H",
+            "APS-C",
+            '1.5"',
+            "Micro Four Thirds",
+            '1"',
+            '1/1.2"',
+            '2/3"',
+            '1/1.7"',
+            '1/1.8"',
+            '1/2.3"',
+            '1/2.5"',
+            '1/2.7"',
+            '1/3.2"',
+          ],
+        },
+        {
+          "Optical Zoom": [
+            "50x & Above",
+            "20x to 49.9x",
+            "10x to 19.9x",
+            "4x to 9.9x",
+            "3.9x & Under",
+          ],
+        },
+        {
+          "Video Capture Resolution": [
+            "8K UHD 4320p",
+            "4K 2160p",
+            "FHD 1520p",
+            "FHD 1080p",
+            "FHD 1080i",
+            "HD 720p",
+            "SD 480p",
+          ],
+        },
+        {
+          "Video Capture Format": [
+            "ASF",
+            "AVCHD",
+            "AVI",
+            "MJPEG",
+            "MOV",
+            "MPEG VX",
+            "MPEG-4",
+            "XAVC",
+          ],
+        },
+        {
+          Color: [
+            "Under 2 Inches",
+            "2 to 2.9 Inches",
+            "3 to 3.9 Inches",
+            "4 to 4.9 Inches",
+            "5 to 6.9 Inches",
+            "Over 7 Inches",
+          ],
+        },
+        { "Viewscreen Display Size": ["Optical", "LCD", "Both"] },
+        {
+          "Camera Viewfinder Type": [
+            "0.5x",
+            "0.70x",
+            "0.72x",
+            "0.75x",
+            "0.78x",
+            "0.82x",
+            "0.85x",
+            "0.8x",
+            "0.94x",
+            "0.95x",
+            "1.02x",
+            "1.48x",
+          ],
+        },
+        { "Camera Viewfinder Magnification": ["Headphones", "Speakers"] },
+        { "Audio Output Type": ["Live View", "Time Lapse"] },
+        { "Digital Camera Feature": ["Center-Weighted", "Evaluative", "Spot"] },
+        { "Camera Metering Mode": ["Contrast Detection", "Phase Detection"] },
+        {
+          "Digital Camera Autofocus Technology": [
+            "Active",
+            "Hybrid",
+            "Passive",
+          ],
+        },
+        {
+          "Digital Camera Focus Description": [
+            "Aperture Priority",
+            "Automatic",
+            "Easy",
+            "Landscape",
+            "Macro",
+            "Manual",
+            "Movie",
+            "Night Portrait",
+            "Panorama",
+            "Portrait",
+            "Program",
+            "Shutter Priority",
+            "Sports",
+            "Underwater",
+          ],
+        },
+        { "Shooting Modes": ["100", "125", "160", "200", "400", "80"] },
+        {
+          "Expanded ISO Minimum": [
+            "102400",
+            "12800",
+            "1600",
+            "25600",
+            "3200",
+            "4000",
+            "51200",
+            "6400",
+          ],
+        },
+        {
+          "Expanded ISO Maximum": [
+            "10 to 19",
+            "20 to 29",
+            "30 to 39",
+            "40 to 49",
+            "50 to 59",
+            "60 & above",
+            "Up to 9",
+          ],
+        },
+        { "Autofocus Points": ["Basic", "Fine", "Normal"] },
+        {
+          "JPEG Quality Level": [
+            "Auto",
+            "Cloudy",
+            "Custom",
+            "Daylight",
+            "Flash Use",
+            "Kelvin",
+            "Shade",
+            "Tungsten",
+            "White Fluorescent Light",
+          ],
+        },
+        { "White Balance Settings": ["BSI CMOS", "CCD", "CMOS", "MOS"] },
+        { "Photo Sensor Technology": ["Adult", "Kid"] },
+        {
+          "Digital Camera Age Range Description": [
+            "Ethernet",
+            "HDMI",
+            "Micro HDMI",
+            "Micro USB",
+            "USB",
+          ],
+        },
+        {
+          "Electronics Connectivity Technology": [
+            "Bluetooth",
+            "Infrared",
+            "NFC",
+            "Wi-Fi",
+          ],
+        },
+        {
+          "Personal Electronics Wireless Connectivity Type": [
+            "Up to 1.9 in",
+            "2 to 2.9 in",
+            "3 to 3.9 in",
+            "4 in & above",
+          ],
+        },
+        {
+          "Height Top to Bottom": [
+            "Up to 1.9 in",
+            "2 to 2.9 in",
+            "3 to 3.9 in",
+            "4 in & above",
+          ],
+        },
+        {
+          "Item Depth Front to Back": [
+            "Up to 2.9 in",
+            "3 to 3.9 in",
+            "4 to 4.9 in",
+            "5 in & above",
+          ],
+        },
+        { "Item Width Side to Side": ["Small Business"] },
+        { "Business Type": ["Fisheye", "Macro", "Telephoto", "Wide Angle"] },
+        { "Lens Type": ["Built-In", "Hotshoe", "Studio"] },
+        { "Camera Flash": ["Articulating", "Fixed", "Tilting"] },
+        { "Display Fixture Type": ["AMOLED", "LCD", "OLED"] },
+        {
+          "Display Type": [
+            "Canon EF",
+            "Canon EF-M",
+            "Canon EF-S",
+            "Canon RF",
+            "Fujifilm G",
+            "Fujifilm X",
+            "Leica L",
+            "Leica M",
+            "Micro Four Thirds",
+            "Nikon 1",
+            "Nikon F",
+            "Nikon Z",
+            "Pentax KAF",
+            "Pentax KAF2",
+            "Pentax KAF3",
+            "Samsung NX",
+            "Sony A",
+            "Sony E",
+          ],
+        },
+        { "Digital Camera Compatible Mountings": ["DPReview Tested"] },
+        { "Camera Expert Reviews": ["Works with Alexa"] },
+        { "Amazon Certified": ["Automatic", "Manual"] },
+        { "Exposure Control Type": ["Amazon Brands"] },
+        { "From Our Brands": ["Frustration-Free Packaging"] },
+        { "Packaging Option": ["New", "Renewed", "Used"] },
+        { Condition: ["New Arrivals", "Coming Soon"] },
+        { "New Arrivals": ["Energy Star"] },
+        { Certification: ["Amazon Global Store"] },
+        { "Amazon Global Store": ["International Shipping Eligible"] },
+        { "International Shipping": ["Include Out of Stock"] },
+      ],
+      3: [
+        { Condition: ["New", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+
+      4: [
+        {
+          "Personal Computer CPU Model Manufacturer": [
+            "AMD",
+            "Apple",
+            "ARM",
+            "Intel",
+            "NVIDIA",
+          ],
+        },
+        {
+          "Computer Processor Count": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "12",
+            "14",
+            "16",
+            "18",
+            "20",
+            "24",
+            "32",
+            "64",
+          ],
+        },
+        {
+          "Desktop Computer Graphics Card Interface": [
+            "AGP",
+            "Integrated",
+            "PCI Express",
+          ],
+        },
+        {
+          "Computer Operating System": [
+            "Windows 11 Home",
+            "Windows 11 Pro",
+            "Windows 11 in S mode",
+            "Windows 10 Home",
+            "Windows 10 Pro",
+            "Windows 10 in S mode",
+            "Windows Legacy System",
+            "Mac OS",
+            "Chrome OS",
+            "Linux",
+            "DOS",
+          ],
+        },
+        { "PC Graphics Processor Manufacturer": ["AMD", "Intel", "NVIDIA"] },
+        { "Personal Computer Cellular Technology": ["4G", "5G"] },
+        {
+          "Personal Electronics Wireless Connectivity Type": [
+            "Bluetooth",
+            "NFC",
+            "Wi-Fi",
+          ],
+        },
+        {
+          "Computer Processor Type": [
+            "AMD A-Series",
+            "AMD A10",
+            "AMD A4",
+            "AMD A6",
+            "AMD A8",
+            "AMD Athlon",
+            "AMD Athlon II",
+            "AMD E-Series",
+            "AMD FX",
+            "AMD Phenom",
+            "AMD Phenom II",
+            "AMD Ryzen 3",
+            "AMD Ryzen 5",
+            "AMD Ryzen 7",
+            "AMD Ryzen 9",
+            "AMD Ryzen Threadripper",
+            "AMD Sempron",
+            "Intel Atom",
+            "Intel Celeron",
+            "Intel Core 2 Duo",
+            "Intel Core 2 Quad",
+            "Intel Core M",
+            "Intel Core i3",
+            "Intel Core i5",
+            "Intel Core i7",
+            "Intel Core i9",
+            "Intel Pentium",
+            "Intel Xeon",
+          ],
+        },
+        { "Personal Computer CPU Socket Type": ["AMD", "Intel"] },
+        {
+          "Computer RAM Capacity": [
+            "2 GB",
+            "4 GB",
+            "8 GB",
+            "16 GB",
+            "32 GB",
+            "64 GB",
+          ],
+        },
+        { "Graphics Card Chipset Type": ["NVIDIA", "AMD / ATI"] },
+        {
+          "Screen Size": [
+            "Up to 19.9 in",
+            "20.0 to 21.9 in",
+            "22.0 to 23.9 in",
+            "24.0 in & above",
+          ],
+        },
+        {
+          "Hard Disk Size": [
+            "4 TB & Above",
+            "3 TB",
+            "2 TB",
+            "1.5 TB",
+            "1 TB",
+            "501 to 999 GB",
+            "321 to 500 GB",
+            "121 to 320 GB",
+            "81 to 120 GB",
+            "Up to 80 GB",
+          ],
+        },
+        {
+          "CPU Processor Speed": [
+            "1 to 1.59 GHz",
+            "1.60 to 1.79 GHz",
+            "1.80 to 1.99 GHz",
+            "2.00 to 2.49 GHz",
+            "2.50 to 2.99 GHz",
+            "3.00 to 3.49 GHz",
+            "3.50 to 3.99 GHz",
+            "4.0 GHz & Above",
+          ],
+        },
+        { "Desktop Hard Drive Type": ["HDD", "SSD", "SSHD"] },
+        {
+          "Personal Computer Connectivity Technology": [
+            "Ethernet",
+            "HDMI",
+            "LAN",
+            "Thunderbolt 3",
+            "USB",
+          ],
+        },
+        { "Keyboard Layout": ["QWERTY", "QWERTZ", "QZERTY", "Workman"] },
+        {
+          "Special Features": [
+            "Memory Card Reader",
+            "Microphone",
+            "Optical Drive",
+            "Speakers",
+            "Webcam",
+          ],
+        },
+        { "Desktop Computer Aspect Ratio": ["16:10", "16:9", "4:3"] },
+        {
+          Resolution: [
+            "1024 x 768",
+            "1280 x 720",
+            "1280 x 1024",
+            "1440 x 900",
+            "1600 x 900",
+            "1920 x 1080",
+            "1920 x 1200",
+            "2560 x 1440",
+            "2560 x 1600",
+            "3840 x 2160",
+            "5120 x 2880",
+          ],
+        },
+        {
+          "Computer Graphics Processor": [
+            "AMD FirePro",
+            "AMD Radeon 500 Series",
+            "AMD Radeon HD",
+            "AMD Radeon Pro",
+            "AMD Radeon R5",
+            "AMD Radeon R7",
+            "AMD Radeon R9",
+            "AMD Radeon RX 400",
+            "AMD Radeon RX 500",
+            "AMD Radeon RX Vega",
+            "AMD Radeon Vega Series",
+            "ATI Radeon",
+            "Intel HD Graphics",
+            "Intel Iris Plus Graphics",
+            "Intel UHD Graphics",
+            "NVIDIA GeForce",
+            "NVIDIA GeForce GT",
+            "NVIDIA GeForce GTX",
+            "NVIDIA GeForce RTX",
+            "NVIDIA Quadro FX",
+            "NVIDIA Quadro K",
+            "NVIDIA Quadro M",
+            "NVIDIA Quadro NVS",
+            "Nvidia GeForce MX Series",
+            "Nvidia Quadro P Series",
+            "Nvidia Quadro RTX Series",
+          ],
+        },
+        {
+          "Personal Computer Usage": [
+            "Business",
+            "Education",
+            "Everyday Use",
+            "Gaming",
+            "Multimedia",
+            "Photo Editing",
+            "Video Editing",
+          ],
+        },
+        { "Desktop PC Monitor Option": ["Monitor Included"] },
+        {
+          "Personal Computer RAM Memory Technology": [
+            "DDR",
+            "DDR2",
+            "DDR3",
+            "DDR4",
+            "DDR5",
+            "LPDDR3",
+            "LPDDR4",
+          ],
+        },
+        { "Business Type": ["Small Business"] },
+        { "Personal Computer Graphics Type": ["Dedicated", "Integrated"] },
+        {
+          "Dedicated Graphics Memory": [
+            "Up to 2 GB",
+            "3 to 4 GB",
+            "5 to 6 GB",
+            "6 to 7 GB",
+            "8 GB & above",
+          ],
+        },
+        {
+          "Included Components": [
+            "Keybord",
+            "Monitor",
+            "Mouse",
+            "RGB Lighting",
+            "Speakers",
+            "Water Cooling",
+            "Webcam",
+          ],
+        },
+        { "Total Video Out Ports": ["1", "2", "3", "4"] },
+        {
+          "Desktop PC Flash Memory Capacity": [
+            "7 GB & Under",
+            "8 to 16 GB",
+            "32 to 63 GB",
+            "64 GB & Above",
+          ],
+        },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        {
+          "Wireless Communication Standard": [
+            "2.4 GHz Radio Frequency",
+            "5 GHz Radio Frequency",
+            "5.8 GHz Radio Frequency",
+            "801.11ac",
+            "802.11a",
+            "802.11ab",
+            "802.11abg",
+            "802.11a/b/g/n",
+            "802.11a/b/g/n/ac",
+            "802.11ac",
+            "802.11ag",
+            "802.11a/g/n/ac",
+            "802.11ax",
+            "802.11b",
+            "802.11bgn",
+            "802.11b/n/ac",
+            "802.11g",
+            "802.11g/n",
+            "802.11n",
+            "Bluetooth",
+            "DECT",
+          ],
+        },
+        { "New Arrivals": ["New Arrivals"] },
+        { Certification: ["Energy Star"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+      5: [
+        { "Business Type": ["Small Business"] },
+        { "Augmented Reality": ["Virtual Try-On"] },
+        { "From Our Brands": ["Amazon Brands"] },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        { "New Arrivals": ["New Arrivals"] },
+        { Certification: ["Energy Star"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+      6: [
+        {
+          "Speaker Mounting Type": [
+            "Ceiling Mount",
+            "Floor Standing",
+            "Flush Mount",
+            "Shelf Mount",
+            "Wall Mount",
+          ],
+        },
+        {
+          "Speaker Maximum Output Power": [
+            "Up to 69 W",
+            "70 to 134 W",
+            "135 to 199 W",
+            "200 W & above",
+          ],
+        },
+        {
+          "Speaker Connectivity Technology": [
+            "Auxiliary",
+            "Bluetooth",
+            "HDMI",
+            "Optical",
+            "RCA",
+            "USB",
+            "Wi-Fi",
+            "Coaxial",
+            "Ethernet",
+            "Infrared",
+            "NFC",
+            "XLR",
+          ],
+        },
+        {
+          "Speaker Surround Sound Channel Configuration": [
+            "1.0",
+            "2.0",
+            "2.1",
+            "2.2",
+            "3.0",
+            "3.1",
+            "3.1.2",
+            "4.1",
+            "4.2",
+            "5.0",
+            "5.1",
+            "5.1.2",
+            "5.1.4",
+            "5.2",
+            "6.1",
+            "7.1",
+            "7.1.2",
+            "7.2",
+          ],
+        },
+        {
+          "Subwoofer Diameter": [
+            "6.5 Inch",
+            "8 Inch",
+            "10 Inch",
+            "12 Inch",
+            "15 Inch",
+            "18 Inch",
+          ],
+        },
+        { "Speaker Amplification Type": ["Active", "Passive"] },
+        { "Audio Output Mode": ["Mono", "Stereo", "Surround"] },
+        {
+          "Wireless Communication Technology": [
+            "Airplay",
+            "Bluetooth",
+            "Infrared",
+            "NFC",
+            "Radio Frequency",
+            "Wi-Fi",
+          ],
+        },
+        { "Frequency Response": ["Up to 99 kHz"] },
+        {
+          "Maximum Range": [
+            "Up to 30.9 ft",
+            "32.0 to 32.9 ft",
+            "33.0 ft & above",
+          ],
+        },
+        { Color: ["Small Business"] },
+        {
+          "Business Type": [
+            "For Computers",
+            "For DVD Players",
+            "For Gaming Consoles",
+            "For Music Players",
+            "For Smartphones or Tablets",
+            "For Surround Sound Systems",
+            "For Televisions",
+          ],
+        },
+        { "Recommended Uses For Product": ["View In Your Room"] },
+        { "Augmented Reality": ["App", "Voice"] },
+        {
+          "Smart Home Device Control Method": [
+            "Amazon Alexa",
+            "Remote Control",
+            "Button",
+            "Google Assistant",
+          ],
+        },
+        {
+          "Speaker Controller Type": [
+            "Not Water Resistant",
+            "Water Resistant",
+            "Waterproof",
+          ],
+        },
+        {
+          "Water Resistance Level": [
+            "Bass Boost",
+            "Built In Microphone",
+            "Hi Res Audio",
+            "Usb Port",
+            "Waterproof",
+            "Display",
+            "Dolby Enabled",
+            "Multi Room Audio",
+          ],
+        },
+        {
+          "Speaker Special Features": [
+            "Amazon Music",
+            "Apple Music",
+            "Pandora",
+            "Spotify",
+            "Tidal",
+          ],
+        },
+        {
+          "Supported Internet Services": [
+            "Up to 4.9 in",
+            "5 to 8.9 in",
+            "9 to 12.9 in",
+            "13 in & above",
+          ],
+        },
+        {
+          "Speaker Height": [
+            "Up to 5.9 in",
+            "6 to 11.9 in",
+            "12 to 17.9 in",
+            "18 in & above",
+          ],
+        },
+        {
+          "Speaker Width": [
+            "Up to 6.9 in",
+            "7 to 12.9 in",
+            "13 to 18.9 in",
+            "19 in & above",
+          ],
+        },
+        {
+          "Speaker Depth": [
+            "Up to 4.9 h",
+            "5 to 7.9 h",
+            "8 to 10.9 h",
+            "11 to 13.9 h",
+            "14 h & above",
+          ],
+        },
+        { "Speaker Battery Average Life": ["Works with Alexa"] },
+        { "Amazon Certified": ["Amazon Brands"] },
+        { "From Our Brands": ["Frustration-Free Packaging"] },
+        { "Packaging Option": ["New Arrivals", "Coming Soon"] },
+        { "New Arrivals": ["Energy Star"] },
+        { Certification: ["Amazon Global Store"] },
+        { "Amazon Global Store": ["International Shipping Eligible"] },
+        { "International Shipping": ["New", "Renewed", "Used"] },
+        { Condition: ["Include Out of Stock"] },
+      ],
+
+      7: [
+        {
+          "Speaker Mounting Type": [
+            "Ceiling Mount",
+            "Floor Standing",
+            "Shelf Mount",
+            "Tabletop Mount",
+            "Wall Mount",
+          ],
+        },
+        {
+          "Speaker Maximum Output Power": [
+            "Up to 69 W",
+            "70 to 134 W",
+            "135 to 199 W",
+            "200 W & above",
+          ],
+        },
+        {
+          "Speaker Connectivity Technology": [
+            "Auxiliary",
+            "Bluetooth",
+            "HDMI",
+            "Optical",
+            "RCA",
+            "USB",
+            "Wi-Fi",
+            "Coaxial",
+            "NFC",
+          ],
+        },
+        {
+          "Speaker Surround Sound Channel Configuration": [
+            "2.0",
+            "2.1",
+            "3.0",
+            "3.1",
+            "3.1.2",
+            "4.1",
+            "4.2",
+            "5.0",
+            "5.1",
+            "5.1.2",
+            "7.1",
+          ],
+        },
+        { "Subwoofer Diameter": ["6.5 Inch", "8 Inch", "10 Inch", "12 Inch"] },
+        { "Speaker Amplification Type": ["Active", "Passive"] },
+        { "Audio Output Mode": ["Stereo", "Surround"] },
+        {
+          "Wireless Communication Technology": [
+            "Airplay",
+            "Bluetooth",
+            "Radio Frequency",
+            "Wi-Fi",
+          ],
+        },
+        { "Frequency Response": ["Up to 99 kHz"] },
+        {
+          "Maximum Range": [
+            "Up to 30.9 ft",
+            "32.0 to 32.9 ft",
+            "33.0 ft & above",
+          ],
+        },
+        { Color: ["Small Business"] },
+        {
+          "Business Type": [
+            "For Computers",
+            "For Gaming Consoles",
+            "For Music Players",
+            "For Smartphones or Tablets",
+            "For Surround Sound Systems",
+            "For Televisions",
+          ],
+        },
+        { "Recommended Uses For Product": ["View In Your Room"] },
+        { "Augmented Reality": ["App", "Voice"] },
+        {
+          "Smart Home Device Control Method": [
+            "Amazon Alexa",
+            "Remote Control",
+            "Button",
+            "Google Assistant",
+          ],
+        },
+        {
+          "Speaker Controller Type": [
+            "Bass Boost",
+            "Built In Microphone",
+            "Hi Res Audio",
+            "Usb Port",
+            "Multi Room Audio",
+          ],
+        },
+        { "Speaker Special Features": ["Spotify"] },
+        {
+          "Supported Internet Services": [
+            "Up to 4.9 in",
+            "5 to 8.9 in",
+            "9 to 12.9 in",
+            "13 in & above",
+          ],
+        },
+        {
+          "Speaker Height": [
+            "Up to 5.9 in",
+            "6 to 11.9 in",
+            "12 to 17.9 in",
+            "18 in & above",
+          ],
+        },
+        { "Speaker Width": ["Up to 6.9 in", "7 to 12.9 in", "19 in & above"] },
+        { "Speaker Depth": ["11 to 13.9 h", "14 h & above"] },
+        { "Speaker Battery Average Life": ["Works with Alexa"] },
+        { "Amazon Certified": ["Amazon Brands"] },
+        { "From Our Brands": ["Frustration-Free Packaging"] },
+        { "Packaging Option": ["New Arrivals", "Coming Soon"] },
+        { "New Arrivals": ["Energy Star"] },
+        { Certification: ["Amazon Global Store"] },
+        { "Amazon Global Store": ["International Shipping Eligible"] },
+        { "International Shipping": ["New", "Renewed", "Used"] },
+        { Condition: ["Include Out of Stock"] },
+      ],
+      8: [
+        {
+          "Cellular Phone Operating System": [
+            "Android",
+            "Blackberry",
+            "iOS",
+            "Nucleus OS",
+            "Symbian",
+            "Windows Mobile",
+          ],
+        },
+        {
+          "Cellular Phone Operating System Version": [
+            "Android 10.0",
+            "Android 11.0",
+            "Android 12.0",
+            "Android 13.0",
+            "Android 9.0",
+            "iOS 12",
+            "iOS 14",
+            "iOS 16",
+            "Android 4.0",
+            "Android 4.1",
+            "Android 4.2",
+            "Android 4.4",
+            "Android 5.0",
+            "Android 5.1",
+            "Android 6.0",
+            "Android 7.0",
+            "Android 7.1",
+            "Android 8.0",
+            "Android 8.1",
+            "BlackBerry 10.0",
+            "iOS 13",
+            "iOS 15",
+            "iOS 9",
+            "MIUI 12",
+            "OxygenOS",
+            "Symbian 9.3",
+          ],
+        },
+        {
+          "Item Weight": [
+            "Up to 4.9 oz",
+            "5 to 6.9 oz",
+            "7 to 8.9 oz",
+            "9 oz & above",
+          ],
+        },
+        {
+          "Cell Phone Carrier": [
+            "AT&T Wireless",
+            "Boost Mobile",
+            "Cricket Wireless",
+            "Google Fi",
+            "Lycamobile",
+            "Metro by T-Mobile",
+            "Net10 Wireless",
+            "Simple Mobile",
+            "Sprint",
+            "Straight Talk",
+            "T-Mobile",
+            "Ting",
+            "TracFone Wireless",
+            "UScellular",
+            "Unlocked",
+            "Verizon Wireless",
+            "Virgin Mobile",
+          ],
+        },
+        {
+          "Electronics Device Model Year": [
+            "2022",
+            "2021",
+            "2020",
+            "2019",
+            "2018",
+            "2017",
+            "2016",
+            "2015",
+          ],
+        },
+        { Condition: ["New", "Renewed", "Used"] },
+        {
+          "Phone Color": [
+            "Up to 3.9 GB",
+            "4 GB",
+            "8 GB",
+            "16 GB",
+            "32 GB",
+            "64 GB",
+            "128 GB",
+            "256 GB & above",
+          ],
+        },
+        {
+          "Cell Phone Internal Storage Memory": [
+            "Up to 3.9 in",
+            "4 to 4.4 in",
+            "4.5 to 4.9 in",
+            "5 to 5.4 in",
+            "5.5 in & above",
+          ],
+        },
+        { "Cell Phone Display Size": ["16:10", "16:9", "4:3", "5:4"] },
+        {
+          "Cell Phone Aspect Ratio": [
+            "Bar",
+            "Foldable Case",
+            "Foldable Screen",
+            "Slate",
+            "Slider",
+          ],
+        },
+        { "Form Factor": ["Micro", "Nano", "Standard"] },
+        { "Sim Card Size": ["Bluetooth", "Infrared", "NFC", "USB", "Wi-Fi"] },
+        {
+          "Cell Phone Connectivity Technology": [
+            "Bluetooth Enabled",
+            "Camera",
+            "Dual Band",
+            "Dual Core Processor",
+            "Expandable Memory",
+            "Fast Charging Support",
+            "Fingerprint Sensor",
+            "Built-In GPS",
+            "Internationally Sourced",
+            "Octa Core Processor",
+            "Push to Talk",
+            "Quad Band",
+            "Quad Core Processor",
+            "Touchscreen",
+            "Video Calling",
+            "Water Resistant",
+            "Basic Phone",
+            "Dual Camera",
+            "Dual SIM",
+            "Mobile Hotspot Capability",
+            "Smartphone",
+            "Text/Instant Messaging",
+          ],
+        },
+        { "Cell Phone Features": ["AMOLED", "LCD", "OLED"] },
+        {
+          "Display Type": [
+            "Phone Case",
+            "Power Adapter",
+            "SIM Tray Ejector",
+            "Stylus",
+            "USB Cable",
+            "Audio Adapter",
+            "Headset",
+            "Screen Protector",
+          ],
+        },
+        {
+          "Cellular Phone Included Components": [
+            "Up to 2.9 MP",
+            "3 to 4.9 MP",
+            "5 to 7.9 MP",
+            "8 to 12.9 MP",
+            "13 to 19.9 MP",
+            "20 MP & above",
+          ],
+        },
+        {
+          "Cell Phone Camera Resolution": [
+            "Aperture Priority",
+            "Automatic",
+            "Custom",
+            "High Dynamic Range",
+            "Macro",
+            "Manual",
+            "Night Mode",
+            "Panorama",
+            "Portrait",
+            "Program",
+            "Scene",
+            "Slow Motion",
+            "Sports",
+            "Time Lapse",
+            "Underwater",
+          ],
+        },
+        {
+          "Cell Phone Shooting Modes": [
+            "Up to 6.9 MP",
+            "7.0 to 9.9 MP",
+            "10.0 to 12.9 MP",
+            "13.0 MP & above",
+          ],
+        },
+        {
+          "Front Photo Sensor Resolution": [
+            "Face Recognition",
+            "Fingerprint Recognition",
+            "Iris Recognition",
+            "Voice Recognition",
+          ],
+        },
+        {
+          "Cellular Phone Biometric Security Feature": [
+            "Up to 88 Hz",
+            "89 to 104 Hz",
+            "105 to 120 Hz",
+          ],
+        },
+        {
+          "Refresh Rate": [
+            "Buttons",
+            "Dial",
+            "OCR",
+            "Keyboard",
+            "Keypad",
+            "Pinyin Keypad",
+            "Microphone",
+            "Mouse",
+            "Numeric Keypad",
+            "Touchscreen",
+            "Touchscreen with Stylus Support",
+          ],
+        },
+        {
+          "Cell Phone Human Interface Input": [
+            "Single SIM",
+            "Dual SIM",
+            "Quad SIM",
+          ],
+        },
+        {
+          "SIM Card Slot Count": [
+            "3.5 mm Jack",
+            "Lightning",
+            "Micro USB",
+            "Mini USB",
+            "USB Type C",
+          ],
+        },
+        {
+          "Cell Phone Connector Type": [
+            "1080 x 1920",
+            "1080 x 2160",
+            "1080 x 2280",
+            "1080 x 2340",
+            "1080 x 2400",
+            "1280 x 720",
+            "1440 x 2560",
+            "1440 x 2880",
+            "1440 x 2960",
+            "1440 x 3040",
+            "1440 x 3120",
+            "1440 x 3200",
+            "1440 x 720",
+            "1560 x 720",
+            "1600 x 720",
+            "1920 x 1080",
+            "2220 x 1080",
+            "2280 x 1080",
+            "2340 x 1080",
+            "240 x 320",
+            "240 x 400",
+            "2400 x 1080",
+            "2560 x 1440",
+            "2960 x 1440",
+            "3040 x 1440",
+            "320 x 240",
+            "3840 x 2160",
+            "480 x 800",
+            "540 x 960",
+            "720 x 1280",
+            "720 x 1440",
+            "720 x 1520",
+            "720 x 1560",
+            "720 x 1600",
+          ],
+        },
+        {
+          "Cell Phone Resolution": [
+            "Not Water Resistant",
+            "Water-Resistant",
+            "Waterproof",
+          ],
+        },
+        { "Water Resistance Level": ["1080p", "4k", "8k"] },
+        { "Video Capture Resolution": ["Wide Angle"] },
+        {
+          "Lens Type": [
+            "Up to 9.9 MP",
+            "10 to 12.9 MP",
+            "13 to 15.9 MP",
+            "16 MP & above",
+          ],
+        },
+        {
+          "Cellular Phone Photo Sensor Resolution": [
+            "Up to 6.9 h",
+            "7 to 12.9 h",
+            "13 to 18.9 h",
+            "19 h & above",
+          ],
+        },
+        { "Cellular Phone Battery Average Life": ["2G", "3G", "4G", "5G"] },
+        {
+          "Cellular Technology": [
+            "Up to 1.9 GB",
+            "2 to 3.9 GB",
+            "4 to 5.9 GB",
+            "6 to 7.9 GB",
+            "8 to 9.9 GB",
+            "10 GB & above",
+          ],
+        },
+        { "Cellular Phone Installed RAM Size": ["Prime Exclusive Phones"] },
+        { "Prime Exclusive Cell Phones": ["International Shipping Eligible"] },
+        { "International Shipping": ["Include Out of Stock"] },
+      ],
+      9: [
+        {
+          "Electronics Device Model Year": [
+            "2022",
+            "2020",
+            "2019",
+            "2018",
+            "2016",
+          ],
+        },
+        {
+          "Streaming Media Player Supported Internet Services": [
+            "Netflix",
+            "Blockbuster",
+            "Browser",
+            "Free Sat/Free View",
+            "Google TV",
+            "Hulu",
+            "Hulu Plus",
+            "iTunes",
+            "Pandora",
+            "Prime Video",
+            "Skype",
+            "Vudu",
+            "YouTube",
+          ],
+        },
+        { "Augmented Reality": ["View In Your Room"] },
+        {
+          "Controller Type": [
+            "App Control",
+            "Button Control",
+            "Remote Control",
+            "Voice Control",
+          ],
+        },
+        {
+          "Special Features": [
+            "Browser",
+            "Chromecast",
+            "DLNA",
+            "Miracast",
+            "Parental Controls",
+            "Sleep Timer",
+            "USB Recording (DVR)",
+          ],
+        },
+        {
+          "Streaming Media Player Connector Type": [
+            "HDMI",
+            "Micro USB",
+            "RCA",
+            "VGA",
+          ],
+        },
+        { Resolution: ["1080p", "4k", "720p", "8k"] },
+        { "Form Factor": ["TV Box", "TV Stick"] },
+        { "Streaming Media Player Video Codec": ["Motion Jpeg"] },
+        { "From Our Brands": ["Amazon Brands"] },
+        {
+          "Connectivity Technology": [
+            "Bluetooth",
+            "Ethernet",
+            "HDMI",
+            "USB",
+            "Wi-Fi",
+          ],
+        },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        { "New Arrivals": ["New Arrivals"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+
+      10: [
+        { "Display Type": ["LCD", "LED", "OLED", "VFD"] },
+        {
+          "Radio Special Features": [
+            "Portable",
+            "Rechargeable",
+            "Built-In AM Antenna",
+            "Built-In Clock",
+            "Built-In Flashlight",
+            "Dust Resistant",
+            "Lightweight",
+            "Shockproof",
+          ],
+        },
+        {
+          "Power Source Type": [
+            "Battery Powered",
+            "Corded Electric",
+            "Solar Powered",
+          ],
+        },
+        {
+          "Radio Radio Bands Supported": [
+            "1-Band",
+            "11-Band",
+            "2-Band",
+            "3-Band",
+            "4-Band",
+            "7-Band",
+            "8-Band",
+            "9-Band",
+          ],
+        },
+        {
+          "Connectivity Technology": [
+            "Auxiliary",
+            "Bluetooth",
+            "Ethernet",
+            "IR",
+            "USB",
+            "Wi-Fi",
+          ],
+        },
+        {
+          "Compatible Devices": [
+            "Earphone",
+            "Headphone",
+            "Laptop",
+            "MP3 Player",
+            "Smartphone",
+            "Speaker",
+            "Tablet",
+          ],
+        },
+        { "Radio Tuner Technology": ["AM", "FM", "SSB", "Internet Radio"] },
+        {
+          "Water Resistance Level": [
+            "Not Water Resistant",
+            "Water Resistant",
+            "Waterproof",
+          ],
+        },
+        { Style: ["Classic", "Contemporary", "Modern", "Retro"] },
+        {
+          "Recommended Uses For Product": ["Music", "News", "Sports Broadcast"],
+        },
+        {
+          "Included Components": [
+            "Owner's Manual",
+            "Power Adapter",
+            "Quick Start Guide",
+          ],
+        },
+        { "Amazon Certified": ["Works with Alexa"] },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        { "New Arrivals": ["New Arrivals"] },
+        { Certification: ["Energy Star"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+      11: [
+        {
+          "Tablet Computer Operating System": [
+            "Android",
+            "ChromeOS",
+            "FireOS",
+            "iOS",
+            "iPadOS",
+            "Windows",
+          ],
+        },
+        {
+          "Tablet Computer Operating System Version": [
+            "Android 10",
+            "Android 11",
+            "Android 11 Go",
+            "Android 12",
+            "Android 9 Pie",
+            "Windows 10 Home",
+            "Windows 10 Professional",
+            "Windows 11",
+            "iPadOS 14",
+            "Android 10 Go",
+            "Android 2.3 Gingerbread",
+            "Android 4.0 Ice Cream Sandwich",
+            "Android 4.1 Jelly Bean",
+            "Android 4.2 Jelly Bean",
+            "Android 4.4 KitKat",
+            "Android 5.0 Lollipop",
+            "Android 5.1 Lollipop",
+            "Android 6.0 Marshmallow",
+            "Android 7.0 Nougat",
+            "Android 7.1 Nougat",
+            "Android 8.1 Go",
+            "Android 8.1 Oreo",
+            "iOS 10",
+            "iOS 11",
+            "iOS 6",
+            "iOS 8",
+            "iOS 9",
+            "Windows 7 Professional",
+            "Windows 8 Professional",
+            "Windows 8.1",
+            "Windows 8.1 Pro",
+          ],
+        },
+        {
+          "Tablet Display Size": [
+            "Under 7 Inches",
+            "7 to 7.9 Inches",
+            "8 to 8.9 Inches",
+            "9 to 9.9 Inches",
+            "10 to 10.9 Inches",
+            "11 Inches & Up",
+          ],
+        },
+        {
+          "Tablet Screen Resolution": [
+            "1024 x 600",
+            "1024 x 768",
+            "1280 x 800",
+            "1920 x 1080",
+            "2048 x 1536",
+            "2560 x 1600",
+            "2736 x 1824",
+            "1366 x 768",
+            "1920 x 1200",
+            "2224 x 1668",
+            "2880 x 1920",
+            "3000 x 2000",
+          ],
+        },
+        {
+          "Tablet Computer Special Features": [
+            "Fast Charging",
+            "Phone Call Functionality",
+            "Stereo Speakers",
+            "Supports USB OTG",
+            "Expandable Storage",
+            "Media Card Reader",
+            "USB Host",
+          ],
+        },
+        {
+          "Memory Storage Capacity": [
+            "Up to 6.9 GB",
+            "7 to 11.9 GB",
+            "12 to 16.9 GB",
+            "17 GB & above",
+          ],
+        },
+        {
+          "Wireless Communication Technology": [
+            "Bluetooth",
+            "Cellular",
+            "NFC",
+            "Wi-Fi",
+          ],
+        },
+        { "Cellular Technology": ["2G", "3G", "4G", "5G"] },
+        {
+          "Cell Phone Carrier": [
+            "AT&T Wireless",
+            "Blue Wireless",
+            "T-Mobile",
+            "Unlocked",
+            "Verizon Wireless",
+          ],
+        },
+        {
+          "Item Weight": [
+            "Up to 19.9 oz",
+            "20 to 27.9 oz",
+            "28 to 35.9 oz",
+            "36 oz & above",
+          ],
+        },
+        {
+          "Tablet Computer Ram Memory Size": [
+            "Up to 1 GB",
+            "2 GB",
+            "3 GB",
+            "4 GB",
+            "6 GB",
+            "8 GB",
+            "16 GB",
+            "32 GB",
+            "64 GB & above",
+          ],
+        },
+        { "Tablet Computer Aspect Ratio": ["16:10", "16:9", "4:3"] },
+        {
+          "Wireless Communication Standard": [
+            "2.4 GHz Radio Frequency",
+            "5 GHz Radio Frequency",
+            "5.8 GHz Radio Frequency",
+            "801.11ac",
+            "802.11a",
+            "802.11a/b/g/n",
+            "802.11a/b/g/n/ac",
+            "802.11ab",
+            "802.11abg",
+            "802.11ac",
+            "802.11ag",
+            "802.11ax",
+            "802.11b",
+            "802.11b/g",
+            "802.11bgn",
+            "802.11g",
+            "802.11n",
+            "Infrared",
+            "IrDA",
+            "Radio Frequency",
+          ],
+        },
+        { "Display Type": ["AMOLED", "LCD", "LED", "OLED"] },
+        {
+          Generation: [
+            "11th Generation",
+            "10th Generation",
+            "9th Generation",
+            "8th Generation",
+            "7th Generation",
+            "6th Generation",
+            "5th Generation",
+            "4th Generation",
+            "3rd Generation",
+            "2nd Generation",
+            "1st Generation",
+          ],
+        },
+        {
+          "Rear Facing Camera Photo Sensor Resolution": [
+            "Up to 3 MP",
+            "4 to 6 MP",
+            "7 to 9 MP",
+            "10 to 12 MP",
+            "13 MP & above",
+          ],
+        },
+        {
+          "Tablet Graphics Processor Manufacturer": [
+            "AMD",
+            "ARM",
+            "Intel",
+            "Nvidia",
+            "PowerVR",
+            "Qualcomm",
+          ],
+        },
+        { Color: ["Small Business"] },
+        {
+          "Business Type": [
+            "Up to 3 hours",
+            "4 to 6 hours",
+            "7 to 9 hours",
+            "10 to 13 hours",
+            "14 hours & above",
+          ],
+        },
+        {
+          "Tablet Battery Life": [
+            "Adreno",
+            "Apple",
+            "Intel",
+            "Mali",
+            "PowerVR",
+          ],
+        },
+        {
+          "Tablet Graphics Coprocessor": [
+            "Allwinner",
+            "AMD",
+            "Apple",
+            "ARM",
+            "Intel",
+            "MediaTek",
+            "NVIDIA",
+            "Qualcomm",
+            "Rockchip",
+            "Samsung",
+            "Unisoc",
+            "VIA",
+          ],
+        },
+        { "Tablet CPU Manufacturer": ["Amazon Brands"] },
+        { "From Our Brands": ["New Arrivals"] },
+        {
+          "New Arrivals": [
+            "Up to 1.4 GHz",
+            "1.5 to 1.9 GHz",
+            "2 to 2.4 GHz",
+            "2.5 to 2.9 GHz",
+            "3 to 3.4 GHz",
+            "3.5 to 3.9 GHz",
+            "4 GHz & above",
+          ],
+        },
+        { "Tablet CPU Speed": ["Energy Star"] },
+        { Certification: ["International Shipping Eligible"] },
+        { "International Shipping": ["New", "Renewed", "Used"] },
+        { Condition: ["Include Out of Stock"] },
+      ],
+      12: [
+        { "Landline Phone Features": ["Corded", "Cordless"] },
+        { "Number of Telephone Lines": ["Multi-Line", "Single-Line"] },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        { Certification: ["Energy Star"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+
+      13: [
+        {
+          "Laptop CPU Manufacturer": [
+            "AMD",
+            "Apple",
+            "ARM",
+            "Intel",
+            "NVIDIA",
+            "Qualcomm",
+            "VIA",
+          ],
+        },
+        {
+          "Computer Processor Count": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "8",
+            "10",
+            "12",
+            "14",
+            "16",
+            "24",
+          ],
+        },
+        {
+          "Computer Operating System": [
+            "Windows 11 Home",
+            "Windows 11 Pro",
+            "Windows 11 in S mode",
+            "Windows 10 Home",
+            "Windows 10 Pro",
+            "Windows 10 in S mode",
+            "Windows Legacy System",
+            "Mac OS",
+            "Chrome OS",
+            "Linux",
+          ],
+        },
+        {
+          "Laptop Display Size": [
+            "17 Inches & Above",
+            "16 to 16.9 Inches",
+            "15 to 15.9 Inches",
+            "14 to 14.9 Inches",
+            "13 to 13.9 Inches",
+            "12 to 12.9 Inches",
+            "11 to 11.9 Inches",
+            "11 Inches & Under",
+          ],
+        },
+        {
+          "Personal Electronics Wireless Connectivity Type": [
+            "Bluetooth",
+            "NFC",
+            "Wi-Fi",
+          ],
+        },
+        { "Display Type": ["AMOLED", "LCD", "LED", "OLED"] },
+        {
+          "Computer Processor Type": [
+            "AMD A-Series",
+            "AMD A10",
+            "AMD A4",
+            "AMD A6",
+            "AMD A8",
+            "AMD Athlon",
+            "AMD E-Series",
+            "AMD FX",
+            "AMD Phenom",
+            "AMD Ryzen 3",
+            "AMD Ryzen 5",
+            "AMD Ryzen 7",
+            "AMD Ryzen 9",
+            "Intel Atom",
+            "Intel Celeron",
+            "Intel Core 2 Duo",
+            "Intel Core 2 Quad",
+            "Intel Core M",
+            "Intel Core i3",
+            "Intel Core i5",
+            "Intel Core i7",
+            "Intel Core i9",
+            "Intel Pentium",
+            "Intel Xeon",
+          ],
+        },
+        {
+          "Laptop Computer Special Features": [
+            "Anti Glare Coating",
+            "Backlit Keyboard",
+            "Fingerprint Reader",
+            "HD Audio",
+            "Memory Card Slot",
+            "Numeric Keypad",
+            "Spill resistant",
+            "Support Stylus",
+            "TrackPoint",
+          ],
+        },
+        {
+          "CPU Processor Speed": [
+            "1 to 1.59 GHz",
+            "1.60 to 1.79 GHz",
+            "1.80 to 1.99 GHz",
+            "2.00 to 2.49 GHz",
+            "2.50 to 2.99 GHz",
+            "3.00 to 3.49 GHz",
+            "3.50 to 3.99 GHz",
+            "4.0 GHz & Above",
+          ],
+        },
+        {
+          "Hard Disk Size": [
+            "4 TB & Above",
+            "3 TB",
+            "2 TB",
+            "1.5 TB",
+            "1 TB",
+            "501 to 999 GB",
+            "321 to 500 GB",
+            "121 to 320 GB",
+            "81 to 120 GB",
+            "Up to 80 GB",
+          ],
+        },
+        {
+          "Laptop Computer Weight": [
+            "Up to 3 Pounds",
+            "3 to 3.9 Pounds",
+            "4 to 4.9 Pounds",
+            "5 to 5.9 Pounds",
+            "6 to 6.9 Pounds",
+            "7 to 7.9 Pounds",
+            "8 Pounds & Above",
+          ],
+        },
+        { "Laptop Hard Drive Type": ["Solid State Drive", "Hybrid Drive"] },
+        {
+          "Number of Laptop USB 3.0 Ports": [
+            "5 or More",
+            "4",
+            "3",
+            "2",
+            "1",
+            "None",
+          ],
+        },
+        { "Laptop WLAN": ["802.11a/b/g/n", "802.11ac", "802.11b/g/n"] },
+        { "Laptop Computer Video Output": ["HDMI", "VGA"] },
+        {
+          "Notebook Computer Connectivity Technology": [
+            "Bluetooth",
+            "Ethernet",
+            "HDMI",
+            "USB",
+            "Wi-Fi",
+          ],
+        },
+        { "Computer Graphics Card Type": ["Dedicated", "Integrated"] },
+        { Resolution: ["1080p", "4K", "720p", "760i"] },
+        { "Keyboard Layout": ["QWERTY", "QWERTZ"] },
+        {
+          "Human Interface Input": [
+            "Touch Bar",
+            "Touchscreen",
+            "Touchscreen with Stylus Support",
+          ],
+        },
+        { "Camera Description": ["Front", "Rear"] },
+        {
+          "Biometric Security Feature": [
+            "Face Recognition",
+            "Fingerprint Recognition",
+            "Iris Recognition",
+          ],
+        },
+        {
+          "Notebook Computer Ram Memory Size": [
+            "2 GB",
+            "4 GB",
+            "8 GB",
+            "16 GB",
+            "32 GB",
+            "64 GB",
+          ],
+        },
+        {
+          "Notebook Computer Hardware Interface": [
+            "3.5mm Audio",
+            "802.11 ac/b/g/n",
+            "802.11 b/g/n",
+            "ATA",
+            "Bluetooth",
+            "Bluetooth 4.0",
+            "Bluetooth 5",
+            "DVD-R",
+            "DVD-RW",
+            "DisplayPort",
+            "Ethernet",
+            "HDMI",
+            "Headphone",
+            "Infrared",
+            "Lightning",
+            "Media Card",
+            "Micro-HDMI",
+            "MicroSD",
+            "Mini-DisplayPort",
+            "Multimedia Card",
+            "PCI",
+            "SDHC",
+            "SDXC",
+            "Secure Digital Card",
+            "Serial Interface",
+            "Sim Card",
+            "Solid State Drive",
+            "Thunderbolt",
+            "Thunderbolt 4",
+            "USB",
+            "USB 2.0 Type A",
+            "USB 3.0 Type A",
+            "USB 3.0 Type C",
+            "USB 3.1 Type A",
+            "USB 3.1 Type C",
+            "USB 3.2 Gen 1",
+            "USB 3.2 Gen 2",
+            "VGA",
+            "eSATA",
+            "mini HDMI",
+          ],
+        },
+        {
+          "Notebook Computer RAM Memory Technology": [
+            "DDR2",
+            "DDR3",
+            "DDR4",
+            "DDR5",
+            "Lpddr 5",
+            "LPDDR3",
+            "LPDDR4",
+            "LPDDR4X",
+          ],
+        },
+        { "Laptop Usage": ["Business", "Gaming", "Multimedia", "Student"] },
+        { "Business Type": ["Small Business"] },
+        {
+          "Laptop Computer Graphics Coprocessor": [
+            "AMD Radeon RX 6800M",
+            "Intel Iris Xe Graphics",
+            "NVIDIA GeForce GTX 1650",
+            "NVIDIA GeForce GTX 1650 Ti",
+            "NVIDIA GeForce GTX 1660Ti",
+            "NVIDIA GeForce RTX 2060",
+            "NVIDIA GeForce RTX 2070",
+            "NVIDIA GeForce RTX 3050",
+            "NVIDIA GeForce RTX 3050 Ti",
+            "NVIDIA GeForce RTX 3060",
+            "NVIDIA GeForce RTX 3070",
+            "NVIDIA GeForce RTX 3070 Ti",
+            "NVIDIA GeForce RTX 3080",
+            "NVIDIA GeForce RTX 3080 Ti",
+            "NVIDIA RTX 2070 Super",
+            "AMD Radeon R5",
+            "AMD Radeon RX Vega 10",
+            "AMD Radeon RX Vega 8",
+            "AMD Radeon Vega 3",
+            "AMD Radeon Vega 8",
+            "Intel HD Graphics 400",
+            "Intel HD Graphics 4000",
+            "Intel HD Graphics 4400",
+            "Intel HD Graphics 4600",
+            "Intel HD Graphics 500",
+            "Intel HD Graphics 520",
+            "Intel HD Graphics 5500",
+            "Intel HD Graphics 605",
+            "Intel HD Graphics 620",
+            "Intel Iris Plus",
+            "Intel UHD Graphics",
+            "Intel UHD Graphics 600",
+            "Intel UHD Graphics 605",
+            "Intel UHD Graphics 620",
+            "Intel UHD Graphics 630",
+            "NVIDIA GeForce GTX 1050 Ti",
+            "NVIDIA GeForce MX450",
+            "NVIDIA GeForce MX550",
+            "NVIDIA Quadro P2000",
+            "NVIDIA Quadro P600",
+          ],
+        },
+        {
+          "Laptop Dedicated Graphics Memory": [
+            "Up to 1 GB",
+            "2 to 3 GB",
+            "4 to 5 GB",
+            "6 to 7 GB",
+            "8 GB & Above",
+          ],
+        },
+        {
+          "Laptop Battery Life": [
+            "Up to 4 Hours",
+            "5 to 7 Hours",
+            "8 to 10 Hours",
+            "11 Hours & Up",
+          ],
+        },
+        { "Laptop Cellular Technology": ["2G", "3G", "4G", "5G"] },
+        {
+          "Laptop Display Resolution": [
+            "1024 x 768 pixel",
+            "1280 x 720 pixel",
+            "1280 x 800 pixel",
+            "1366 x 768 pixel",
+            "1366 x 912 pixel",
+            "1440 x 900 pixel",
+            "1536 x 1024 pixel",
+            "1600 x 900 pixel",
+            "1900 x 1200 pixel",
+            "1920 x 1080 pixel",
+            "1920 x 1200 pixel",
+            "2256 x 1504 pixel",
+            "2496 x 1664 pixel",
+            "2560 x 1440 pixel",
+            "2560 x 1600 pixel",
+            "2736 x 1824 pixel",
+            "2880 x 1800 pixel",
+            "3000 x 2000 pixel",
+            "3024 x 1964 pixel",
+            "3072 x 1920 pixel",
+            "3456 x 2160 pixel",
+            "3840 x 2160 pixel",
+            "3840 x 2400 pixel",
+            "4096 x 2304 pixel",
+          ],
+        },
+        {
+          "Laptop Computer Refresh Rate": [
+            "Up to 58.9 Hz",
+            "59 to 89.9 Hz",
+            "90 to 120.9 Hz",
+            "121 Hz & above",
+          ],
+        },
+        {
+          "Laptop Flash Memory Capacity": [
+            "500 GB & Above",
+            "250 to 499 GB",
+            "120 to 249 GB",
+            "64 to 119 GB",
+            "32 to 63 GB",
+            "17 to 31 GB",
+            "8 to 16 GB",
+            "7 GB & Under",
+          ],
+        },
+        { "New Arrivals": ["New Arrivals"] },
+        { Certification: ["Energy Star"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+      14: [
+        { "Electronic Book Reader Special Features": ["Anti-Glare Screen"] },
+        { "Connectivity Technology": ["Bluetooth", "USB", "Wi-Fi"] },
+        { "Display Technology": ["LCD", "LED"] },
+        { "Electronic Book Reader Battery Description": ["Lithium-Ion"] },
+        {
+          "File Format": [
+            "AAC",
+            "BMP",
+            "CBR",
+            "CBZ",
+            "DOC",
+            "EPUB",
+            "FB2",
+            "FLV",
+            "GIF",
+            "HTML",
+            "JPEG",
+            "MKV",
+            "MOBI",
+            "MOV",
+            "MP3",
+            "PDF",
+            "PNG",
+            "PRC",
+            "RM",
+            "RMVB",
+            "RTF",
+            "TIFF",
+            "TXT",
+            "VOB",
+            "WAV",
+          ],
+        },
+        { "From Our Brands": ["Amazon Brands"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+      15: [
+        {
+          "Wearable Computer Special Features": [
+            "Activity Tracker",
+            "Alarm Clock",
+            "Blood Pressure Monitor",
+            "Body Temperature Monitor",
+            "Calorie Tracker",
+            "Camera",
+            "GPS",
+            "Heart Rate Monitor",
+            "Notifications",
+            "Oxymeter (SpO2)",
+            "Pedometer",
+            "Phone Call",
+            "Sleep Monitor",
+            "Text Messaging",
+            "Time Display",
+            "Voice Call",
+            "Accelerometer",
+            "Always On Display",
+            "Audio Recording",
+            "Breath Monitor",
+            "Calendaring",
+            "Cycle Tracking",
+            "Daily Workout Memory",
+            "Distance Tracker",
+            "Email",
+            "Multisport Tracker",
+            "Music Player",
+            "Sedentary Reminder",
+            "SOS Button",
+            "Video Call",
+            "Video Recording",
+            "Voice Control",
+            "Wireless Charging",
+          ],
+        },
+        {
+          "Wearable Computer Band Material Type": [
+            "Silicone",
+            "Stainless Steel",
+            "Faux Leather",
+            "Fluoroelastomer",
+            "Leather",
+            "Nylon",
+            "Polyester",
+            "Resin",
+            "Rubber",
+          ],
+        },
+        { "Item Shape": ["Oval", "Rectangular", "Round", "Square"] },
+        {
+          "Wearable Computer Case Material Type": [
+            "Aluminum",
+            "Stainless Steel",
+            "Acrylonitrile Butadiene Styrene (ABS)",
+            "Ceramic",
+            "Metal",
+            "Plastic",
+            "Resin",
+            "Titanium",
+          ],
+        },
+        {
+          "Connectivity Technology": [
+            "Bluetooth",
+            "Cellular",
+            "HDMI",
+            "USB",
+            "Wi-Fi",
+          ],
+        },
+        {
+          Style: [
+            "Casual",
+            "Classic",
+            "Hybrid",
+            "Minimalist",
+            "Modern",
+            "Retro",
+            "Tactical",
+          ],
+        },
+        {
+          "Wearable Computer GPS Navigation": [
+            "Built-in GPS",
+            "GPS via Smartphone",
+            "No GPS",
+          ],
+        },
+        {
+          "Sport Type": [
+            "Badminton",
+            "Basketball",
+            "Boating",
+            "Climbing",
+            "Cycling",
+            "Diving",
+            "Fishing",
+            "Fitness",
+            "Football (American)",
+            "Golf",
+            "Hiking",
+            "Kayaking",
+            "Motor Sports",
+            "Multi-Sports",
+            "Running",
+            "Skiing",
+            "Snowboarding",
+            "Soccer",
+            "Surfing",
+            "Swimming",
+            "Tennis",
+            "Triathlon",
+            "Walking",
+            "Yoga",
+          ],
+        },
+        {
+          "Computer Storage Drive Compatible Devices": [
+            "Laptop",
+            "PC",
+            "Smartphone",
+            "Tablet",
+          ],
+        },
+        {
+          "Screen Size": [
+            "Up to 32.9 mm",
+            "33.0 to 34.9 mm",
+            "35.0 to 36.9 mm",
+            "37.0 mm & above",
+          ],
+        },
+        {
+          "Item Weight": [
+            "Up to 2.9 oz",
+            "3.0 to 5.9 oz",
+            "6.0 to 8.9 oz",
+            "9.0 oz & above",
+          ],
+        },
+        {
+          "Memory Storage Capacity": [
+            "Up to 3,939 MB",
+            "3,980 to 4,019 MB",
+            "4,020 MB & above",
+          ],
+        },
+        {
+          "Water Resistance Level": [
+            "Not Water Resistant",
+            "Water-Resistant",
+            "Waterproof",
+          ],
+        },
+        {
+          "Wearable Computer Operating System": [
+            "Android Wear",
+            "Tizen",
+            "watchOS",
+          ],
+        },
+        { "Wearable Device Department": ["Men", "Women", "Boys", "Girls"] },
+        { "Business Type": ["Small Business"] },
+        { "Augmented Reality": ["Virtual Try-On"] },
+        { "Compatible Phone Models": ["Android Devices", "iOS Devices"] },
+        {
+          "Wearable Computer International Protection Rating": [
+            "IP68",
+            "IP54",
+            "IP56",
+            "IP65",
+            "IP66",
+            "IP67",
+            "IPX7",
+            "IPX8",
+          ],
+        },
+        { "Controller Type": ["Amazon Alexa", "Google Assistant", "Siri"] },
+        {
+          "Wearable Computer Target Audience": [
+            "Boys",
+            "Men",
+            "Unisex Adults",
+            "Women",
+            "Baby Boys",
+            "Girls",
+            "Unisex Kids",
+            "Unisex Youth",
+          ],
+        },
+        {
+          "Wearable Technology Battery Life": [
+            "Up to 4 days",
+            "5 to 10 days",
+            "11 to 30 days",
+            "1 to 3 months",
+            "3 months & above",
+          ],
+        },
+        { "From Our Brands": ["Amazon Brands"] },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        {
+          "Watch Case Diameter": [
+            "Under 20mm",
+            "20mm to 24mm",
+            "25mm to 29mm",
+            "30mm to 34mm",
+            "35mm to 39mm",
+            "40mm to 44mm",
+            "45mm to 49mm",
+            "50mm & Over",
+          ],
+        },
+        { "New Arrivals": ["New Arrivals"] },
+        { Certification: ["Energy Star"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+
+      16: [
+        { "From Our Brands": ["Amazon Brands"] },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        { "New Arrivals": ["New Arrivals"] },
+        { Certification: ["Energy Star"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+      17: [
+        { Color: ["2.5 mm Jack", "3.5 mm Jack", "6.35 mm Jack"] },
+        {
+          "Headphones Jack": [
+            "Car Audio Systems",
+            "Cellphones",
+            "Desktops",
+            "Gaming Consoles",
+            "Laptops",
+            "Music Production Equipment",
+            "Tablets",
+            "Television",
+            "Motorcycles",
+            "Telephones",
+          ],
+        },
+        {
+          "Headphones Compatible Devices": [
+            "Animal",
+            "Anime",
+            "Cartoon",
+            "Fantasy",
+            "Movie",
+            "TV Series",
+            "Video Game",
+          ],
+        },
+        {
+          Theme: [
+            "Alexa",
+            "Call Control",
+            "Google Assistant",
+            "Media Control",
+            "Noise Control",
+            "Siri",
+            "Voice Control",
+            "Volume Control",
+          ],
+        },
+        {
+          "Control Type": [
+            "Cable",
+            "Charging Station",
+            "Ear Cushions",
+            "Eartip",
+            "Headband",
+            "Protective Case",
+            "User Manual",
+            "Wireless Charging Case",
+          ],
+        },
+        {
+          "Included Components": [
+            "Active Noise Cancellation",
+            "None",
+            "Sound Isolation",
+          ],
+        },
+        {
+          "Noise Control": [
+            "Acrylonitrile Butadiene Styrene (ABS)",
+            "Aluminum",
+            "Faux Leather",
+            "Leather",
+            "Metal",
+            "Plastic",
+            "Polycarbonate (PC)",
+            "Polyurethane (PU)",
+            "Rubber",
+            "Silicone",
+            "Stainless Steel",
+            "Thermoplastic Elastomer (TPE)",
+            "Wood",
+          ],
+        },
+        {
+          Material: [
+            "Detachable",
+            "Retractable",
+            "Tangle Free",
+            "Without Cable",
+          ],
+        },
+        { "Cable Feature": ["App", "Remote", "Touch", "Voice"] },
+        {
+          "Control Method": [
+            "Up to 99 dB",
+            "100 to 103 dB",
+            "104 to 107 dB",
+            "108 dB & above",
+          ],
+        },
+        {
+          Sensitivity: ["Not Water Resistant", "Water-Resistant", "Waterproof"],
+        },
+        {
+          "Water Resistance Level": [
+            "DJ Style",
+            "Foldable",
+            "Lightweight",
+            "Microphone",
+            "Phone Control",
+            "Sports & Exercise",
+            "Tangle-Free Cord",
+            "Volume Control",
+            "Wireless",
+          ],
+        },
+        {
+          "Headphone Feature": ["Bluetooth", "Infrared", "KLEER", "NFC", "RF"],
+        },
+        { "Headphone Wireless Type": ["Semi-Open Back", "Closed-Back"] },
+        { "Headphone Earcup Style": ["Kid", "Adult", "Teen"] },
+        {
+          "Headphones Age Range Description": [
+            "Up to 1.9",
+            "2 to 3.9",
+            "4 to 5.9",
+            "6 & above",
+          ],
+        },
+        {
+          "Unit Count": [
+            "Audio Monitoring",
+            "Calling",
+            "Cycling",
+            "Disc Jockey Use",
+            "Exercising",
+            "Gaming",
+            "Motorcycling",
+            "Recording",
+            "Running",
+            "Skateboarding",
+            "Snowboarding",
+            "Swimming",
+          ],
+        },
+        { "Headphones Recommended Use": ["Wired", "Wireless"] },
+        { "Headphones Connectivity Technology": ["Amazon Brands"] },
+        { "From Our Brands": ["Frustration-Free Packaging"] },
+        { "Packaging Option": ["New Arrivals"] },
+        { "New Arrivals": ["Energy Star"] },
+        { Certification: ["Amazon Global Store"] },
+        { "Amazon Global Store": ["International Shipping Eligible"] },
+        { "International Shipping": ["New", "Renewed", "Used"] },
+        { Condition: ["Include Out of Stock"] },
+      ],
+      18: [
+        {
+          "Video Format": [
+            "Prime Video",
+            "Blu-ray",
+            "DVD",
+            "VHS",
+            "HD DVD",
+            "Laser Disc",
+          ],
+        },
+        {
+          "New Releases": [
+            "Last 7 Days",
+            "Last 30 Days",
+            "Last 90 Days",
+            "Coming Soon",
+          ],
+        },
+        {
+          "Video Genre": [
+            "Action & Adventure",
+            "Animation",
+            "Anime",
+            "Arthouse",
+            "Arts, Culture & Entertainment",
+            "Comedy",
+            "Documentary",
+            "Drama",
+            "Faith & Spirituality",
+            "Fantasy",
+            "Fitness",
+            "Historical",
+            "Horror",
+            "International",
+            "Kids & Family",
+            "LGBTQ",
+            "Military & War",
+            "Music Videos & Concerts",
+            "Musicals",
+            "Romance",
+            "Science Fiction",
+            "Special Interest",
+            "Sports",
+            "Suspense",
+            "Talk Shows & Variety",
+            "Unscripted",
+            "Westerns",
+            "Young Adult",
+          ],
+        },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        {
+          "Video Length": [
+            "Up to 5 Minutes",
+            "6 to 10 Minutes",
+            "11 to 20 Minutes",
+            "21 to 30 Minutes",
+            "31 to 60 Minutes",
+            "61 to 90 Minutes",
+            "More Than 90 Minutes",
+          ],
+        },
+        { Condition: ["New", "Used"] },
+        {
+          "Movie & TV Show Release Decade": [
+            "2020 & Newer",
+            "2010 - 2019",
+            "2000 - 2009",
+            "1990 - 1999",
+            "1980 - 1989",
+            "1970 - 1979",
+            "1960 - 1969",
+            "Up to 1960",
+          ],
+        },
+        { Availability: ["Include Out of Stock"] },
+      ],
+    };
+  </script>
+  <script>
+    var help = "";
+    function change_text(x) {
+      document.getElementById("for-dropdown").innerText =
+        document.getElementById(x).innerText;
+      document.getElementById("section-dropdown").style.display = "none";
+      // ADDING THE FILTER
+
+      help = document.getElementById(x).innerText;
+
+      var idx = parseInt(x);
+      const filter = filters_element[idx];
+      //console.log(filter);
+      var output = "";
+      for (let property in filter) {
+        for (var key in filter[property]) {
+          output +=
+            '<div class="dropdown"><button class="dropdown-btn">' +
+            key +
+            '</button><div class="dropdown-content">';
+          var output2 = "";
+          //console.log(filter[property]);
+          for (let property_list in filter[property][key]) {
+            output +=
+              '<label><input class="checkfilter" type="checkbox" name="' +
+              filter[property][key][property_list] +
+              '"value=' +
+              filter[property][key][property_list] +
+              ">" +
+              filter[property][key][property_list] +
+              "</label>";
+          }
+          output += output2;
+          output += "</div> </div>";
+        }
+      }
+      output +=
+        '<a class="button" id ="GO" style="text-align: center;width: 60px;height: 45px;line-height: 45px; margin: 50px" onclick="gofunc()">GO</a>';
+      document.getElementById("filters").innerHTML = output;
+    }
+
+    function clear_selected() {
+      document.getElementById("for-dropdown").innerText = "Electronics";
+      document.getElementById("section-dropdown").style.display = "block";
+      document.getElementById("filters").innerHTML = '<div id="filters"></div>';
+    }
+
+    function gofunc() {
+      // Select checkboxes with a specific class
+      var checkboxes = document
+        .querySelector(".filters")
+        .querySelectorAll(".checkfilter");
+
+      // Create an empty array to store checked checkboxes
+      var checkedCheckboxes = help;
+
+      // Iterate over the checkboxes
+      checkboxes.forEach(function (checkbox) {
+        // Check if the checkbox is checked
+        //console.log(checkbox);
+        if (checkbox.checked) {
+          // Add the checked checkbox to the array
+          checkedCheckboxes += " " + checkbox.name;
+          // You can also perform any other desired action here
+        }
+      });
+
+      // Output the checked checkboxes
+      console.log(checkedCheckboxes);
+    }
+  </script>
+  <script>
+    var removeSuccess;
+
+    removeSuccess = function () {
+      return $(".button").removeClass("success");
+    };
+
+    $(document).ready(function () {
+      return $(".button").click(function () {
+        $(this).addClass("success");
+        return setTimeout(removeSuccess, 3000);
+      });
+    });
+  </script>
+
+  <script>
+    // var ele = document.getElementsBy("dropdown")[0];
+    var ele = document.getElementsByName("dropdown")[0];
+    ele.style.opacity = 0;
+  </script>
+</html>

@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Electronics</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        /* box-sizing: border-box; */
+      }
+
+      /* body {
+            background-color: rgba(0, 0, 0, 0.938);
+            background-color: #23E3C9;
+            overflow: hidden;
+        } */
+
+      .main-wrapper {
+        /* max-width: 1440px; */
+        margin: auto;
+        /* display: flex; */
+        /* align-items: flex-start; */
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .slider-wrapper {
+        width: 50%;
+        height: 500px;
+        /* display: flex; */
+        /* align-items: center; */
+
+        position: absolute;
+        left: 3vw;
+
+        margin: auto;
+        overflow: hidden;
+      }
+
+      .slides {
+        width: 100%;
+        position: absolute;
+        transition: transform 0.4s ease-in-out;
+      }
+
+      .slides img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 0.3rem;
+      }
+
+      .slider-btns {
+        position: absolute;
+        top: 50%;
+        left: 3vw;
+        z-index: 2;
+        width: 100;
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .slider-btns span {
+        padding: 1rem 1.2rem;
+        font-size: 1.5rem;
+        background: rgba(255, 255, 255, 0.151);
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+      }
+
+      .dots {
+        position: absolute;
+        width: 100%;
+        top: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        z-index: 10000;
+      }
+
+      .dots .dot {
+        width: 1rem;
+        height: 1rem;
+        background-color: white;
+        opacity: 0.2;
+        border-radius: 50%;
+        transition: opacity 0.2s ease-in-out;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 950px) {
+        .slider-wrapper {
+          width: 70%;
+        }
+      }
+
+      @media screen and (max-width: 680px) {
+        .slider-wrapper {
+          width: 90%;
+        }
+      }
+
+      /* .dropdown {
+            position: absolute;
+            top: 17vh;
+            right: 20vw;
+        }
+
+        .dropdown select {
+            padding: 10px;
+            font-size: 16px;
+        } */
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 1.4;
+        color: #fff;
+        background-color: #1f2029;
+        overflow-x: hidden;
+        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg");
+        background-position: center;
+        background-repeat: repeat;
+        background-size: 4%;
+        width: 100%;
+        display: -ms-flexbox;
+        display: flex;
+        flex-direction: row;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-pack: center;
+        /* justify-content: center; */
+        padding-top: 100px;
+        padding-bottom: 300px;
+      }
+
+      .sec-center {
+        position: relative;
+        max-width: 100%;
+        text-align: center;
+        z-index: 200;
+        margin: 0 auto 0 auto;
+        height: 60px;
+      }
+
+      /* [type="checkbox"]:checked,
+      [type="checkbox"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+        opacity: 0;
+        pointer-events: none;
+      } */
+
+      .dark-light:checked + label,
+      .dark-light:not(:checked) + label {
+        position: fixed;
+        top: 40px;
+        right: 40px;
+        z-index: 20000;
+        display: block;
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        cursor: pointer;
+        transition: all 200ms linear;
+        box-shadow: 0 0 25px rgba(255, 235, 167, 0.45);
+      }
+
+      .dark-light:checked + label {
+        transform: rotate(360deg);
+      }
+
+      .dark-light:checked + label:after,
+      .dark-light:not(:checked) + label:after {
+        position: absolute;
+        content: "";
+        top: 1px;
+        left: 1px;
+        overflow: hidden;
+        z-index: 2;
+        display: block;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        background-color: #102770;
+        background-image: url("https://assets.codepen.io/1462889/moon.svg");
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: all 200ms linear;
+        opacity: 0;
+      }
+
+      .dark-light:checked + label:after {
+        opacity: 1;
+      }
+
+      .dark-light:checked + label:before,
+      .dark-light:not(:checked) + label:before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: 1;
+        display: block;
+        border-radius: 50%;
+        width: 46px;
+        height: 46px;
+        background-color: #48dbfb;
+        background-image: url("https://assets.codepen.io/1462889/sun.svg");
+        background-size: 25px 25px;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: all 200ms linear;
+      }
+
+      .dark-light:checked + label:before {
+        background-color: #000;
+      }
+
+      .light-back {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -999999;
+        background-color: #fff;
+        overflow: hidden;
+        background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg");
+        background-position: center;
+        background-repeat: repeat;
+        background-size: 4%;
+        height: 100%;
+        width: 100%;
+        transition: all 200ms linear;
+        opacity: 0;
+      }
+
+      .dark-light:checked ~ .light-back {
+        opacity: 1;
+      }
+
+      .dropdown:checked + label,
+      .dropdown:not(:checked) + label {
+        position: relative;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 2;
+        height: 60px;
+        transition: all 200ms linear;
+        border-radius: 4px;
+        width: 220px;
+        letter-spacing: 1px;
+        display: -webkit-inline-flex;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        justify-content: center;
+        -ms-flex-pack: center;
+        text-align: center;
+        border: none;
+        background-color: #ffeba7;
+        cursor: pointer;
+        color: #102770;
+        box-shadow: 0 12px 35px 0 rgba(255, 235, 167, 0.15);
+      }
+
+      .dark-light:checked ~ .sec-center .for-dropdown {
+        background-color: #102770;
+        color: #ffeba7;
+        box-shadow: 0 12px 35px 0 rgba(16, 39, 112, 0.25);
+      }
+
+      .dropdown:checked + label:before,
+      .dropdown:not(:checked) + label:before {
+        position: fixed;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        cursor: auto;
+        pointer-events: none;
+      }
+
+      .dropdown:checked + label:before {
+        pointer-events: auto;
+      }
+
+      .dropdown:not(:checked) + label .uil {
+        font-size: 24px;
+        margin-left: 10px;
+        transition: transform 200ms linear;
+      }
+
+      .dropdown:checked + label .uil {
+        transform: rotate(180deg);
+        font-size: 24px;
+        margin-left: 10px;
+        transition: transform 200ms linear;
+      }
+
+      .section-dropdown {
+        position: absolute;
+        padding: 5px;
+        background-color: #111;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        border-radius: 4px;
+        display: block;
+        box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.4);
+        z-index: 2;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition: all 200ms linear;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown {
+        background-color: #fff;
+        box-shadow: 0 14px 35px 0 rgba(9, 9, 12, 0.15);
+      }
+
+      .dropdown:checked ~ .section-dropdown {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .section-dropdown:before {
+        position: absolute;
+        top: -20px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        content: "";
+        display: block;
+        z-index: 1;
+      }
+
+      .section-dropdown:after {
+        position: absolute;
+        top: -7px;
+        left: 30px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #111;
+        content: "";
+        display: block;
+        z-index: 2;
+        transition: all 200ms linear;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown:after {
+        border-bottom: 8px solid #fff;
+      }
+
+      .section-dropdown a {
+        position: relative;
+        color: #fff;
+        transition: all 200ms linear;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        border-radius: 2px;
+        padding: 5px 0;
+        padding-left: 20px;
+        padding-right: 15px;
+        margin: 2px 0;
+        text-align: left;
+        text-decoration: none;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        justify-content: space-between;
+        -ms-flex-pack: distribute;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown a {
+        color: #102770;
+      }
+
+      .section-dropdown a:hover {
+        color: #102770;
+        background-color: #ffeba7;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown a:hover {
+        color: #ffeba7;
+        background-color: #102770;
+      }
+
+      .section-dropdown a .uil {
+        font-size: 22px;
+      }
+
+      .dropdown-sub:checked + label,
+      .dropdown-sub:not(:checked) + label {
+        position: relative;
+        color: #fff;
+        transition: all 200ms linear;
+        font-family: "Roboto", sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        border-radius: 2px;
+        padding: 5px 0;
+        padding-left: 20px;
+        padding-right: 15px;
+        text-align: left;
+        text-decoration: none;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        align-items: center;
+        justify-content: space-between;
+        -ms-flex-pack: distribute;
+        cursor: pointer;
+      }
+
+      .dropdown-sub:checked + label .uil,
+      .dropdown-sub:not(:checked) + label .uil {
+        font-size: 22px;
+      }
+
+      .dropdown-sub:not(:checked) + label .uil {
+        transition: transform 200ms linear;
+      }
+
+      .dropdown-sub:checked + label .uil {
+        transform: rotate(135deg);
+        transition: transform 200ms linear;
+      }
+
+      .dropdown-sub:checked + label:hover,
+      .dropdown-sub:not(:checked) + label:hover {
+        color: #102770;
+        background-color: #ffeba7;
+      }
+
+      .dark-light:checked ~ .sec-center .section-dropdown .for-dropdown-sub {
+        color: #102770;
+      }
+
+      .dark-light:checked
+        ~ .sec-center
+        .section-dropdown
+        .for-dropdown-sub:hover {
+        color: #ffeba7;
+        background-color: #102770;
+      }
+
+      .section-dropdown-sub {
+        position: relative;
+        display: block;
+        width: 100%;
+        pointer-events: none;
+        opacity: 0;
+        max-height: 0;
+        padding-left: 10px;
+        padding-right: 3px;
+        overflow: hidden;
+        transition: all 200ms linear;
+      }
+
+      .dropdown-sub:checked ~ .section-dropdown-sub {
+        pointer-events: auto;
+        opacity: 1;
+        max-height: 999px;
+      }
+
+      .section-dropdown-sub a {
+        font-size: 14px;
+      }
+
+      .section-dropdown-sub a .uil {
+        font-size: 20px;
+      }
+
+      .logo {
+        position: fixed;
+        top: 50px;
+        left: 40px;
+        display: block;
+        z-index: 11000000;
+        background-color: transparent;
+        border-radius: 0;
+        padding: 0;
+        transition: all 250ms linear;
+      }
+
+      .logo:hover {
+        background-color: transparent;
+      }
+
+      .logo img {
+        height: 26px;
+        width: auto;
+        display: block;
+        transition: all 200ms linear;
+      }
+
+      .dark-light:checked ~ .logo img {
+        filter: brightness(10%);
+      }
+
+      @media screen and (max-width: 991px) {
+        .logo {
+          top: 30px;
+          left: 20px;
+        }
+
+        .dark-light:checked + label,
+        .dark-light:not(:checked) + label {
+          top: 20px;
+          right: 20px;
+        }
+      }
+    </style>
+
+    <style>
+      @media screen and (max-width: 991px) {
+        .main-wrapper {
+          display: flex;
+          /* flex-direction: column;
+                justify-content: center;
+                align-items: center; */
+        }
+
+        .slider-btns {
+          position: absolute;
+          left: 20vw;
+        }
+
+        .sec-center {
+          position: absolute;
+          bottom: 0;
+          left: 1%;
+        }
+
+        .button {
+          position: absolute;
+          bottom: 0;
+        }
+      }
+    </style>
+
+    <style>
+      /* @import url(//codepen.io/chrisdothtml/pen/ojLzJK.css); */
+
+      /* Reset */
+      /* Main Styles */
+      .button {
+        display: block;
+        background-color: #c0392b;
+        width: 150px;
+        height: 60px;
+        line-height: 60px;
+        /* margin: auto; */
+        color: #fff;
+        position: absolute;
+        /* top: 0; */
+        /* bottom: 50%; */
+        /* left: 0; */
+        right: 3%;
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+        transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+        z-index: 10000;
+      }
+
+      .button span,
+      .button .icon {
+        display: block;
+        height: 100%;
+        text-align: center;
+        position: absolute;
+        top: 0;
+      }
+
+      .button span {
+        width: 72%;
+        line-height: inherit;
+        font-size: 22px;
+        text-transform: uppercase;
+        left: 0;
+        transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+      }
+
+      .button span:after {
+        content: "";
+        background-color: #a53125;
+        width: 2px;
+        height: 70%;
+        position: absolute;
+        top: 15%;
+        right: -1px;
+      }
+
+      .button .icon {
+        width: 28%;
+        right: 0;
+        transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+      }
+
+      .button .icon .fa {
+        font-size: 30px;
+        vertical-align: middle;
+        transition: all 0.25s cubic-bezier(0.31, -0.105, 0.43, 1.4),
+          height 0.25s ease;
+      }
+
+      .button .icon .fa-remove {
+        height: 36px;
+      }
+
+      .button .icon .fa-check {
+        display: none;
+      }
+
+      .button.success span,
+      .button:hover span {
+        left: -72%;
+        opacity: 0;
+      }
+
+      .button.success .icon,
+      .button:hover .icon {
+        width: 100%;
+      }
+
+      .button.success .icon .fa,
+      .button:hover .icon .fa {
+        font-size: 45px;
+      }
+
+      .button.success {
+        background-color: #27ae60;
+      }
+
+      .button.success .icon .fa-remove {
+        display: none;
+      }
+
+      .button.success .icon .fa-check {
+        display: inline-block;
+      }
+
+      .button:hover {
+        opacity: 0.9;
+      }
+
+      .button:hover .icon .fa-remove {
+        height: 46px;
+      }
+
+      .button:active {
+        opacity: 1;
+      }
+
+      #filters {
+        width: 291px;
+        height: 186px;
+        background-color: green;
+        position: absolute;
+        left: 783px;
+        top: 177px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main-wrapper">
+      <div class="slider-btns">
+        <span id="prev-btn"><i class="fa-solid fa-chevron-left"></i></span>
+        <span id="next-btn"><i class="fa-solid fa-angle-right"></i></span>
+      </div>
+      <div class="slider-wrapper">
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="slides">
+          <img
+            src="https://source.unsplash.com/random/?ecommerce,electronics sale,gadgets sale"
+            alt=""
+          />
+        </div>
+        <div class="slides">
+          <img
+            src="https://source.unsplash.com/random/?smartphone sale in amazon flipkart"
+            alt=""
+          />
+        </div>
+        <div class="slides">
+          <img
+            src="https://source.unsplash.com/random/?laptop sale, tv sale"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="dropdown">
+        <select>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </div> -->
+
+    <input
+      class="dark-light"
+      type="checkbox"
+      id="dark-light"
+      name="dark-light"
+    />
+    <label for="dark-light"></label>
+
+    <div class="light-back"></div>
+
+    <!-- <a href="https://front.codes/" class="logo" target="_blank">
+        <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+    </a> -->
+
+    <div class="sec-center">
+      <input class="dropdown" type="checkbox" id="dropdown" name="dropdown" />
+      <label class="for-dropdown" id="for-dropdown" for="dropdown"
+        >Electronics <i class="uil uil-arrow-down"></i
+      ></label>
+      <div class="section-dropdown" id="section-dropdown">
+        <a href="#" id="1" onclick="change_text(this.id)"
+          >Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <!-- <input class="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub" />
+            <label class="for-dropdown-sub" for="dropdown-sub">Dropdown Sub <i class="uil uil-plus"></i></label>
+            <div class="section-dropdown-sub">
+                <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
+                <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
+            </div> -->
+        <a href="#" id="2" onclick="change_text(this.id)"
+          >Cameras & Photography <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="3" onclick="change_text(this.id)"
+          >Car & Vehicle Electronics <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="4" onclick="change_text(this.id)"
+          >Computers & Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="5" onclick="change_text(this.id)"
+          >GPS & Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="6" onclick="change_text(this.id)"
+          >Home Audio<i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="7" onclick="change_text(this.id)"
+          >Home Theater, TV & Video <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="8" onclick="change_text(this.id)"
+          >Mobiles & Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="9" onclick="change_text(this.id)"
+          >Portable Media Players <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="10" onclick="change_text(this.id)"
+          >Radio Communication <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="11" onclick="change_text(this.id)"
+          >Tablets <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="12" onclick="change_text(this.id)"
+          >Telephones & Accessories<i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="13" onclick="change_text(this.id)"
+          >Warranties <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="14" onclick="change_text(this.id)"
+          >eBook Readers & Accessories<i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="15" onclick="change_text(this.id)"
+          >Wearable Technology <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="16" onclick="change_text(this.id)"
+          >General Purpose Batteries & Battery Chargers
+          <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="17" onclick="change_text(this.id)"
+          >Headphones, Earbuds & Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+        <a href="#" id="18" onclick="change_text(this.id)"
+          >Power Accessories <i class="uil uil-arrow-right"></i
+        ></a>
+      </div>
+    </div>
+
+    <a class="button" href="#" role="button" onclick="clear_selected()">
+      <span>Clear</span>
+      <div class="icon">
+        <i class="fa fa-remove"></i>
+        <i class="fa fa-check"></i>
+      </div>
+    </a>
+
+    <div id="filters">
+      <span>Augmented Reality</span>
+      <form>
+        <input type="checkbox" name="checkbox1" id="checkbox1" value="1" />
+        <label for="checkbox1">Item 1</label><br />
+        <input
+          type="checkbox"
+          name="checkbox2"
+          id="checkbox2"
+          value="2"
+        /><label for="checkbox2">Item 2</label><br />
+        <input type="checkbox" name="checkbox3" id="checkbox3" value="3" />
+        <label for="checkbox3">Item 3</label><br />
+      </form>
+      <span>Augmented Reality</span>
+      <form>
+        <input type="checkbox" name="checkbox1" id="checkbox1" value="1" />
+        <label for="checkbox1">Item 1</label><br />
+        <input
+          type="checkbox"
+          name="checkbox2"
+          id="checkbox2"
+          value="2"
+        /><label for="checkbox2">Item 2</label><br />
+        <input type="checkbox" name="checkbox3" id="checkbox3" value="3" />
+        <label for="checkbox3">Item 3</label><br />
+      </form>
+    </div>
+  </body>
+  <script>
+    const slides = document.querySelectorAll(".slides");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const dots = document.querySelectorAll(".dot");
+
+    let index = 0;
+
+    // Adding opacity to first dot on first time
+
+    dots[0].style.opacity = "1";
+
+    // positioning the slides
+
+    slides.forEach((slide, index) => {
+      slide.style.left = `${index * 100}%`;
+    });
+
+    // move slide function
+
+    const moveSlide = () => {
+      slides.forEach((slide) => {
+        slide.style.transform = `translateX(-${index * 100}%)`;
+      });
+    };
+
+    // remove dots opacity 1 from all dots
+
+    const removeDotsOpacity = () => {
+      dots.forEach((dot) => {
+        dot.style.opacity = ".2";
+      });
+    };
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", (e) => {
+        index = i;
+        removeDotsOpacity();
+        e.target.style.opacity = "1";
+        moveSlide();
+      });
+    });
+
+    // show the previous slide
+
+    prevBtn.addEventListener("click", () => {
+      if (index === 0) return index;
+      index--;
+      removeDotsOpacity();
+      dots[index].style.opacity = "1";
+      moveSlide();
+    });
+
+    // show the next slide
+
+    nextBtn.addEventListener("click", () => {
+      if (index === slides.length - 1) return index;
+      index++;
+      removeDotsOpacity();
+      dots[index].style.opacity = "1";
+      moveSlide();
+    });
+
+    // auto play slide
+
+    const autoPlaySlide = () => {
+      removeDotsOpacity();
+      if (index === slides.length - 1) index = -1;
+      index++;
+      dots[index].style.opacity = "1";
+      moveSlide();
+    };
+
+    window.onload = () => {
+      setInterval(autoPlaySlide, 6000);
+    };
+  </script>
+
+  <script>
+    const filters_element = {
+      1: [
+        { "Augmented Reality": ["View In Your Room", "Virtual Try-On"] },
+        { "Amazon Certified": ["Auto Replenishment", "Works with Alexa"] },
+        { "From Our Brands": ["Amazon Brands"] },
+        { "Packaging Option": ["Frustration-Free Packaging"] },
+        { "New Arrivals": ["New Arrivals", "Coming Soon"] },
+        { Certification: ["Energy Star"] },
+        { "Amazon Global Store": ["Amazon Global Store"] },
+        { "International Shipping": ["International Shipping Eligible"] },
+        { Condition: ["New", "Renewed", "Used"] },
+        { Availability: ["Include Out of Stock"] },
+      ],
+      2: [
+        {
+          "Included Components": [
+            "Camera Body & Accessories",
+            "Camera Body & Lens",
+            "Camera Body Only",
+            "Camera Kit",
+          ],
+        },
+        { "Skill Level": ["Amateur", "Novice", "Professional"] },
+        {
+          "Camera & Camcorder Lens Zoom Type": ["Digital Zoom", "Optical Zoom"],
+        },
+        { "Point & Shoot Camera Size": ["Compact", "Large Sensor Compact"] },
+        {
+          "Camera Sensor Effective Megapixels": [
+            "Up to 9.9 MP",
+            "10 to 14.9 MP",
+            "15 to 19.9 MP",
+            "20 to 24.9 MP",
+            "25 to 29.9 MP",
+            "30 to 39.9 MP",
+            "40 MP & Above",
+          ],
+        },
+        {
+          "Camera Photo Sensor Size": [
+            "Full Frame",
+            "APS-H",
+            "APS-C",
+            '1.5"',
+            "Micro Four Thirds",
+            '1"',
+            '1/1.2"',
+            '2/3"',
+            '1/1.7"',
+            '1/1.8"',
+            '1/2.3"',
+            '1/2.5"',
+            '1/2.7"',
+            '1/3.2"',
+          ],
+        },
+        {
+          "Optical Zoom": [
+            "50x & Above",
+            "20x to 49.9x",
+            "10x to 19.9x",
+            "4x to 9.9x",
+            "3.9x & Under",
+          ],
+        },
+        {
+          "Video Capture Resolution": [
+            "8K UHD 4320p",
+            "4K 2160p",
+            "FHD 1520p",
+            "FHD 1080p",
+            "FHD 1080i",
+            "HD 720p",
+            "SD 480p",
+          ],
+        },
+        {
+          "Video Capture Format": [
+            "ASF",
+            "AVCHD",
+            "AVI",
+            "MJPEG",
+            "MOV",
+            "MPEG VX",
+            "MPEG-4",
+            "XAVC",
+          ],
+        },
+        {
+          Color: [
+            "Under 2 Inches",
+            "2 to 2.9 Inches",
+            "3 to 3.9 Inches",
+            "4 to 4.9 Inches",
+            "5 to 6.9 Inches",
+            "Over 7 Inches",
+          ],
+        },
+        { "Viewscreen Display Size": ["Optical", "LCD", "Both"] },
+        {
+          "Camera Viewfinder Type": [
+            "0.5x",
+            "0.70x",
+            "0.72x",
+            "0.75x",
+            "0.78x",
+            "0.82x",
+            "0.85x",
+            "0.8x",
+            "0.94x",
+            "0.95x",
+            "1.02x",
+            "1.48x",
+          ],
+        },
+        { "Camera Viewfinder Magnification": ["Headphones", "Speakers"] },
+        { "Audio Output Type": ["Live View", "Time Lapse"] },
+        { "Digital Camera Feature": ["Center-Weighted", "Evaluative", "Spot"] },
+        { "Camera Metering Mode": ["Contrast Detection", "Phase Detection"] },
+        {
+          "Digital Camera Autofocus Technology": [
+            "Active",
+            "Hybrid",
+            "Passive",
+          ],
+        },
+        {
+          "Digital Camera Focus Description": [
+            "Aperture Priority",
+            "Automatic",
+            "Easy",
+            "Landscape",
+            "Macro",
+            "Manual",
+            "Movie",
+            "Night Portrait",
+            "Panorama",
+            "Portrait",
+            "Program",
+            "Shutter Priority",
+            "Sports",
+            "Underwater",
+          ],
+        },
+        { "Shooting Modes": ["100", "125", "160", "200", "400", "80"] },
+        {
+          "Expanded ISO Minimum": [
+            "102400",
+            "12800",
+            "1600",
+            "25600",
+            "3200",
+            "4000",
+            "51200",
+            "6400",
+          ],
+        },
+        {
+          "Expanded ISO Maximum": [
+            "10 to 19",
+            "20 to 29",
+            "30 to 39",
+            "40 to 49",
+            "50 to 59",
+            "60 & above",
+            "Up to 9",
+          ],
+        },
+        { "Autofocus Points": ["Basic", "Fine", "Normal"] },
+        {
+          "JPEG Quality Level": [
+            "Auto",
+            "Cloudy",
+            "Custom",
+            "Daylight",
+            "Flash Use",
+            "Kelvin",
+            "Shade",
+            "Tungsten",
+            "White Fluorescent Light",
+          ],
+        },
+        { "White Balance Settings": ["BSI CMOS", "CCD", "CMOS", "MOS"] },
+        { "Photo Sensor Technology": ["Adult", "Kid"] },
+        {
+          "Digital Camera Age Range Description": [
+            "Ethernet",
+            "HDMI",
+            "Micro HDMI",
+            "Micro USB",
+            "USB",
+          ],
+        },
+        {
+          "Electronics Connectivity Technology": [
+            "Bluetooth",
+            "Infrared",
+            "NFC",
+            "Wi-Fi",
+          ],
+        },
+        {
+          "Personal Electronics Wireless Connectivity Type": [
+            "Up to 1.9 in",
+            "2 to 2.9 in",
+            "3 to 3.9 in",
+            "4 in & above",
+          ],
+        },
+        {
+          "Height Top to Bottom": [
+            "Up to 1.9 in",
+            "2 to 2.9 in",
+            "3 to 3.9 in",
+            "4 in & above",
+          ],
+        },
+        {
+          "Item Depth Front to Back": [
+            "Up to 2.9 in",
+            "3 to 3.9 in",
+            "4 to 4.9 in",
+            "5 in & above",
+          ],
+        },
+        { "Item Width Side to Side": ["Small Business"] },
+        { "Business Type": ["Fisheye", "Macro", "Telephoto", "Wide Angle"] },
+        { "Lens Type": ["Built-In", "Hotshoe", "Studio"] },
+        { "Camera Flash": ["Articulating", "Fixed", "Tilting"] },
+        { "Display Fixture Type": ["AMOLED", "LCD", "OLED"] },
+        {
+          "Display Type": [
+            "Canon EF",
+            "Canon EF-M",
+            "Canon EF-S",
+            "Canon RF",
+            "Fujifilm G",
+            "Fujifilm X",
+            "Leica L",
+            "Leica M",
+            "Micro Four Thirds",
+            "Nikon 1",
+            "Nikon F",
+            "Nikon Z",
+            "Pentax KAF",
+            "Pentax KAF2",
+            "Pentax KAF3",
+            "Samsung NX",
+            "Sony A",
+            "Sony E",
+          ],
+        },
+        { "Digital Camera Compatible Mountings": ["DPReview Tested"] },
+        { "Camera Expert Reviews": ["Works with Alexa"] },
+        { "Amazon Certified": ["Automatic", "Manual"] },
+        { "Exposure Control Type": ["Amazon Brands"] },
+        { "From Our Brands": ["Frustration-Free Packaging"] },
+        { "Packaging Option": ["New", "Renewed", "Used"] },
+        { Condition: ["New Arrivals", "Coming Soon"] },
+        { "New Arrivals": ["Energy Star"] },
+        { Certification: ["Amazon Global Store"] },
+        { "Amazon Global Store": ["International Shipping Eligible"] },
+        { "International Shipping": ["Include Out of Stock"] },
+      ],
+      3: "value3",
+
+      4: "value1",
+      5: "value2",
+      6: "value3",
+
+      7: "value1",
+      8: "value2",
+      9: "value3",
+
+      10: "value1",
+      11: "value2",
+      12: "value3",
+
+      13: "value1",
+      14: "value2",
+      15: "value3",
+
+      16: "value1",
+      17: "value2",
+      18: "value3",
+    };
+  </script>
+  <script>
+    function change_text(x) {
+      document.getElementById("for-dropdown").innerText =
+        document.getElementById(x).innerText;
+      document.getElementById("section-dropdown").style.display = "none";
+      // ADDING THE FILTER
+
+      var idx = parseInt(x);
+      const filter = filters_element[idx];
+      console.log(filter);
+      var output = "";
+      for (let property in filter) {
+        for (var key in filter[property]) {
+          output += "<span>" + key + "</span><form>";
+          var output2 = "";
+          console.log(filter[property]);
+          for (let property_list in filter[property][key]) {
+            output +=
+              '<input type="checkbox" name=' +
+              filter[property][key][property_list] +
+              ' id="checkbox1" value="1" /><label for=' +
+              filter[property][key][property_list] +
+              ">" +
+              filter[property][key][property_list] +
+              "</label><br/>";
+          }
+          output += output2;
+          output += "</form>";
+        }
+      }
+      document.getElementById("filters").innerHTML = output;
+    }
+
+    function clear_selected() {
+      document.getElementById("for-dropdown").innerText = "Electronics";
+      document.getElementById("section-dropdown").style.display = "block";
+    }
+  </script>
+  <script>
+    var removeSuccess;
+
+    removeSuccess = function () {
+      return $(".button").removeClass("success");
+    };
+
+    $(document).ready(function () {
+      return $(".button").click(function () {
+        $(this).addClass("success");
+        return setTimeout(removeSuccess, 3000);
+      });
+    });
+  </script>
+</html>

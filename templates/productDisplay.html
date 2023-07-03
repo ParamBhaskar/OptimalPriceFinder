@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Products</title>
+</head>
+<body>
+    <section class="table" id="issue">
+        <h1 class="heading"><span>Books </span> Database </h1>
+
+        <section class="table__header">
+            <div class="input-group">
+                <input type="search" placeholder="Search Data...">
+                <img src="../static/" alt="">
+            </div>
+            <!-- <div class="export__file">
+                <label for="export-file" class="export__file-btn" title="Export File"></label>
+                <input type="checkbox" id="export-file">
+                <div class="export__file-options">
+                    <label>Export As &nbsp; &#10140;</label>
+                    <label for="export-file" id="toPDF">PDF <img src="../static/pdf.png" alt=""></label>
+                    <label for="export-file" id="toJSON">JSON <img src="../static/json.png" alt=""></label>
+                    <label for="export-file" id="toCSV">CSV <img src="../static/csv.png" alt=""></label>
+                    <label for="export-file" id="toEXCEL">EXCEL <img src="../static/excel.png" alt=""></label>
+                </div>
+            </div> -->
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        {% comment %} <th> S/NO <span class="icon-arrow">&UpArrow;</span></th> {% endcomment %}
+                        <th> ID <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Book Name <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Author <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> ISBN <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Category <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Rack Number <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Total Number of Copies <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Copies Already Issued <span class="icon-arrow">&UpArrow;</span></th>
+                        {% comment %} <th> Issue <span class="icon-arrow">&UpArrow;</span></th> {% endcomment %}
+                        {% comment %} <th> Reserve <span class="icon-arrow">&UpArrow;</span></th> {% endcomment %}
+                        <th> Edit <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Delete <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for book in books %}
+                    <tr>
+                        <td>{{forloop.counter}}.</td>
+                        <td>{{book.name}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.isbn}}</td>
+                        <td>{{book.category}}</td>
+                        <td>{{book.rack_no}}</td>
+                        {% comment %} <td>{{book.copies}}-{{book.copies_issued}}</td> {% endcomment %}
+                        <td>{{book.copies}}</td>
+                        <td>{{book.copies_issued}}</td>
+                        {% comment %} <td><a href="/issue_book/{{book.id}}/" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to Issue this book?')">Issue</a></td>
+                        <td><a href="/reserve_book/{{book.id}}/" class="btn btn-danger"
+                                onclick="return confirm('Are you sure you want to Reserve this book?')">Reserve</a>
+                        </td> {% endcomment %}
+
+                        <td><a href="/edit_book/{{book.id}}/" class="btn btn-danger"
+                            onclick="return confirm('Are you sure you want to Edit this book?')">Edit</a></td>
+                    <td><a href="/delete_book/{{book.id}}/" class="btn btn-danger"
+                            onclick="return confirm('Are you sure you want to delete this book?')">Delete</a></td>
+                </tr>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </section>
+</body>
+</html>
