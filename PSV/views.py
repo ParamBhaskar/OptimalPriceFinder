@@ -19,4 +19,4 @@ def my_view(request, stringextra):
 
 def view_cart(request):
     pros = Product.objects.all()
-    return render(request, "cartdisplay.html", {'pros': pros})
+    return render(request, "productDisplay.html", {'pros': pros})

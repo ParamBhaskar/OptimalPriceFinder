@@ -11,6 +11,8 @@ class Product(models.Model):
     rating_count=models.TextField(blank=True)
     # variant_data=models.TextField()
     availability=models.TextField(blank=True)
+    product_url= models.URLField(blank= True)
+    onlineStore= models.TextField(blank=True)
 
 class gostring(models.Model):
     gs= models.CharField(max_length=5000,null=True)

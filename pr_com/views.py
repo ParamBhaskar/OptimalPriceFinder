@@ -134,118 +134,206 @@ def is_valid_url(url):
 
 
 # Function to extract Product Title
+def ama_get_title(soup):
 
-def get_title(soup):
+    try:
+        # Outer Tag Object
+        title = soup.find("span", attrs={"id": 'productTitle'})
 
-	try:
-		# Outer Tag Object
-		title = soup.find("span", attrs={"id": 'productTitle'})
+        # Inner NavigableString Object
+        title_value = title.string
 
-		# Inner NavigableString Object
-		title_value = title.string
+        # Title as a string value
+        title_string = title_value.strip()
 
-		# Title as a string value
-		title_string = title_value.strip()
+        # # Printing types of values for efficient understanding
+        # print(type(title))
+        # print(type(title_value))
+        # print(type(title_string))
+        # print()
 
-		# # Printing types of values for efficient understanding
-		# print(type(title))
-		# print(type(title_value))
-		# print(type(title_string))
-		# print()
+    except AttributeError:
+        title_string = ""
 
-	except AttributeError:
-		title_string = ""
-
-	return title_string
+    return title_string
 
 # Function to extract Product Price
 
 
-def get_price(soup):
+def ama_get_price(soup):
 
-	try:
-		price = soup.find("span", class_='a-price-whole').text
-		cleaned_string = ''.join(filter(str.isdigit, price))
-		price = int(cleaned_string)
+    try:
+        price = soup.find("span", class_='a-price-whole').text
+        cleaned_string = ''.join(filter(str.isdigit, price))
+        price = int(cleaned_string)
 
-	except AttributeError:
-		price = ""
+    except AttributeError:
+        price = ""
 
-	return price
+    return price
 
 # Function to extract Product Rating
 
 
-def get_rating(soup):
+def ama_get_rating(soup):
 
-	try:
-		rating = soup.find(
-		    "i", attrs={'class': 'a-icon a-icon-star a-star-4-5'}).string.strip()
+    try:
+        rating = soup.find(
+            "i", attrs={'class': 'a-icon a-icon-star a-star-4-5'}).string.strip()
 
-	except AttributeError:
+    except AttributeError:
 
-		try:
-			rating = soup.find("span", attrs={'class': 'a-icon-alt'}).string.strip()
-		except:
-			rating = ""
+        try:
+            rating = soup.find(
+                "span", attrs={'class': 'a-icon-alt'}).string.strip()
+        except:
+            rating = ""
 
-	return rating
+    return rating
 
 # Function to extract Number of User Reviews
 
 
-def get_review_count(soup):
-	try:
-		review_count = soup.find(
-		    "span", attrs={'id': 'acrCustomerReviewText'}).string.strip()
+def ama_get_review_count(soup):
+    try:
+        review_count = soup.find(
+            "span", attrs={'id': 'acrCustomerReviewText'}).string.strip()
 
-	except AttributeError:
-		review_count = ""
+    except AttributeError:
+        review_count = ""
 
-	return review_count
+    return review_count
 
 # Function to extract Availability Status
 
 
-def get_availability(soup):
-	try:
-		available = soup.find("div", attrs={'id': 'availability'})
-		available = available.find("span").string.strip()
+def ama_get_availability(soup):
+    try:
+        available = soup.find("div", attrs={'id': 'availability'})
+        available = available.find("span").string.strip()
 
-	except AttributeError:
-		available = ""
+    except AttributeError:
+        available = ""
 
-	return available
+    return available
 
 
-def discover_product_urls(url, HEADERS):
+def flip_get_title(soup):
 
-  response = requests.get(url, headers=HEADERS)
-  soup = BeautifulSoup(response.content, "html.parser")
+    try:
+        # Outer Tag Object
+        title = soup.find("div", class_='_4rR01T').text
 
-  # Find all product divs
-  product_divs = soup.find_all(
-      "a", class_="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal")
-  product_urls = []
-  total = 0
-  for prod in product_divs:
-    product_url = urljoin("https://www.amazon.in/", prod.get("href"))
-    product_urls.append(product_url)
-    if (total < 2):
-        URL = "https://api.scrapingdog.com/scrape?api_key=64a2938f92f9092f20d503cf&url=" + \
-            product_url+"/&dynamic=false"
-        webpage = requests.get(URL, headers=HEADERS)
-        soup = BeautifulSoup(webpage.content, "lxml")
-        product= Product(name=get_title(soup), price= get_price(soup), stars=get_rating(soup), rating_count= get_review_count(soup), availability=get_availability(soup))
-        product.save()
-        print("Product Title =", get_title(soup))
-        print("Product Price =", get_price(soup))
-        print("Product Rating =", get_rating(soup))
-        print("Number of Product Reviews =", get_review_count(soup))
-        print("Availability =", get_availability(soup))
-        print()
-        print()
-        total += 1
+        # Inner NavigableString Object
+        title_value = title
+
+        # Title as a string value
+        title_string = title_value
+
+        # # Printing types of values for efficient understanding
+        # print(type(title))
+        # print(type(title_value))
+        # print(type(title_string))
+        # print()
+
+    except AttributeError:
+        title_string = ""
+
+    return title_string
+
+
+def flip_get_price(soup):
+
+    try:
+        price = soup.find("div", class_='_30jeq3').text
+        cleaned_string = ''.join(filter(str.isdigit, price))
+        price = int(cleaned_string)
+
+    except AttributeError:
+        price = ""
+
+    return price
+# Function to extract Product Rating
+
+
+def flip_get_rating(soup):
+
+    try:
+        rating = soup.find("div", class_='_3LWZlK').text
+
+    except AttributeError:
+
+        # try:
+        # 	rating = soup.find("span", attrs={'class':'a-icon-alt'}).string.strip()
+        # except:
+        rating = ""
+
+    return rating
+
+
+def ama_discover_product_urls(url, HEADERS):
+
+    response = requests.get(url, headers=HEADERS)
+    soup = BeautifulSoup(response.content, "html.parser")
+
+    # Find all product divs
+    ama_product_divs = soup.find_all(
+        "a", class_="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal")
+    ama_product_urls = []
+    total = 0
+    for prod in ama_product_divs:
+        ama_product_url = urljoin("https://www.amazon.in/", prod.get("href"))
+        ama_product_urls.append(ama_product_url)
+        if (total < 2):
+            URL = "https://api.scrapingdog.com/scrape?api_key=64a2938f92f9092f20d503cf&url=" + \
+                ama_product_url+"/&dynamic=false"
+            webpage = requests.get(URL, headers=HEADERS)
+            soup = BeautifulSoup(webpage.content, "lxml")
+            product = Product(name=ama_get_title(soup), price=ama_get_price(soup), stars=ama_get_rating(soup), rating_count=ama_get_review_count(
+                soup), availability=ama_get_availability(soup), product_url=ama_product_url, onlineStore="Amazon")
+            product.save()
+            print("Product Title =", ama_get_title(soup))
+            print("Product Price =", ama_get_price(soup))
+            print("Product Rating =", ama_get_rating(soup))
+            print("Number of Product Reviews =", ama_get_review_count(soup))
+            print("Availability =", ama_get_availability(soup))
+            print()
+            print()
+            total += 1
+
+
+def flip_discover_product_urls(url, HEADERS):
+    response = requests.get(url, headers=HEADERS)
+    soup = BeautifulSoup(response.content, "html.parser")
+    # Find all product divs
+#   ama_product_divs = soup.find_all("a", class_="a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal")
+    flip_product_divs = soup.find_all("div", class_="_2kHMtA")
+#   ama_product_urls = []
+    flip_product_urls = []
+    total = 0
+    for prod in flip_product_divs:
+
+        if (total < 2):
+            soup = prod
+
+            product = Product(name=flip_get_title(soup), price=flip_get_price(soup), stars=flip_get_rating(soup), rating_count=soup.find("span", class_="_2_R_DZ").text,
+                              availability="In Stock", product_url=urljoin("https://www.flipkart.com/", soup.find("a", class_="_1fQZEK").get("href")), onlineStore="Flipkart")
+            product.save()
+
+            print("Product Title =", flip_get_title(soup))
+
+            print("Product Price =", flip_get_price(soup))
+            print("Product Rating =", flip_get_rating(soup))
+            print("Rating Count=", soup.find(
+                "span", class_="_2_R_DZ").text)
+            print("Product Url=", urljoin("https://www.flipkart.com/",
+                                          soup.find("a", class_="_1fQZEK").get("href")))
+            print("Image link=", soup.find(
+                "img", class_="_396cs4").get("src"))
+            print("Desc", soup.find("ul", class_="_1xgFaf").text.split("|"))
+            print()
+            print()
+            total += 1
 
 
 def crawl2(request, stringextra):
@@ -258,14 +346,19 @@ def crawl2(request, stringextra):
     # obj.save()
     # run_spider()
     # ama= AmazonItem()
-    	# Headers for request
-	HEADERS = ({'User-Agent':
-	            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-	            'Accept-Language': 'en-US, en;q=0.5'})
-	url = "https://api.scrapingdog.com/scrape?api_key=64a2938f92f9092f20d503cf&url=https://www.amazon.in/s?k="+stringextra+"&page=1/&dynamic=false"
-	discover_product_urls(url, HEADERS)
-	return redirect("/view_cart")
-	# return HttpResponse("Hi")
+    # Headers for request
+    HEADERS = ({'User-Agent':
+                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+                'Accept-Language': 'en-US, en;q=0.5'})
+    Product.objects.all().delete()
+    url = "https://api.scrapingdog.com/scrape?api_key=64a2938f92f9092f20d503cf&url=https://www.amazon.in/s?k=" + \
+        stringextra+"&page=1/&dynamic=false"
+    ama_discover_product_urls(url, HEADERS)
+    url = "https://api.scrapingdog.com/scrape?api_key=64a2938f92f9092f20d503cf&url=https://www.flipkart.com/search?q=" + \
+        stringextra+"&page=1/&dynamic=false"
+    flip_discover_product_urls(url, HEADERS)
+    return redirect("/view_cart")
+    # return HttpResponse("Hi")
 
 
 # from django.http import HttpResponse
@@ -274,9 +367,6 @@ def crawl2(request, stringextra):
 #    def run_spider_view(request):
     #    run_spider()
     #    return HttpResponse("Scrapy spider executed and JSON file generated.")
-   
-
-
 
 
 # from scrapy.crawler import CrawlerProcess
@@ -301,5 +391,3 @@ def crawl2(request, stringextra):
 
 #     # Return a response or perform further actions
 #     return HttpResponse("Spider executed successfully.")
-
-
