@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +30,5 @@ urlpatterns = [
     # path('<str:stringextra>', views.my_view, name='my-view'),
     path('xyz/<str:stringextra>', include('pr_com.urls')),
     path('view_cart', views.view_cart, name= "view_cart"),
-]
+] + static(settings.MEDIA_URL , document_root= settings.MEDIA_ROOT)
+

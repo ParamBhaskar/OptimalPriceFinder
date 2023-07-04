@@ -146,3 +146,7 @@ else:
     for setting in dir(scrapy_settings):
         if setting.isupper():
             locals()[setting] = getattr(scrapy_settings, setting)
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"

@@ -307,10 +307,16 @@
 
         .textsample {
             position: relative;
-            padding-top: 10%;
-            height: 280px;
+            /* padding-top: 1%; */
+            padding-left: 8%;
+            padding-right: 5%;
+            font-size:135%;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-style: italic;
+            font-weight: bold;
+            height: 380px;
             width: 100%;
-            background-color: white;
+            background-color: rgb(0, 0, 0);
         }
 
         .flex-box-main {
@@ -403,7 +409,7 @@
             top: 12%;
         }
 
-        /*****SVG*****/
+        /**SVG**/
 
         path.one {
             transition: 0.4s;
@@ -1046,16 +1052,16 @@
             <h2 class="logo">P S V</h2>
             <div class="toggle"></div>
         </header>
-
+        
         <div class="overlay">
             <!-- add arrow point here -->
             <!-- <div onclick="location.href='#';" class="arrow" style="cursor: pointer">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div> -->
-            <div class="center-con">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div> -->
+        <div class="center-con">
 
                 <div class="round" onclick="location.href='#flex-box-main';" style="cursor:pointer;">
                     <span></span>
@@ -1111,24 +1117,25 @@
         </div>
     </div>
 
-    <div class="textsample">
-        Het totaalplaatje voor jouw bedrijf. Of je nou op zoek bent naar een
-        moderne website, een opvallend logo, strak drukwerk of het complete
-        plaatje. Damian de Vos Grafisch Ontwerp » één contactpersoon voor al je
-        grafische behoeften.
+    <div class="textsample" style="color: #fafafa;">
+        <img src="../media/logo.jpeg" width="85%" height="50%"><br>
+        Born out of a genuine desire to help people save money on their grocery bills, our website was conceptualized by our ambitious
+        college students who understands the financial challenges faced by fellow students and budget-conscious individuals.
+        With an unwavering commitment to making a positive impact, this bright innovator has created a platform that empowers
+        everyone to shop smarter and stretch their dollars further.
     </div>
 
 
 
     <div class="flex-box-main" id="flex-box-main">
         <div class="flex-box-1">
-            <div class="flex-box-1-subclass" style="background-color: aqua">
+            <div class="flex-box-1-subclass" style="background-color: aqua" >
                 <img src="https://th.bing.com/th/id/OIP.Nfel_u315XsQI33zXgMuyAHaEc?w=282&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7"
                     alt="food" style="height: 100%; width: 100%" onclick="myFunction(this,1);" />
             </div>
             <div class="flex-box-1-subclass" style="background-color: pink">
                 <img src="https://th.bing.com/th/id/OIP.7aRXaK36CctRhCoZb0FYjQHaE7?pid=ImgDet&rs=1" alt="furniture"
-                    style="height: 100%; width: 100%" onclick="myFunction(this,2);" />
+                    style="height: 100%; width: 100% " onclick="myFunction(this,2);" />
             </div>
             <div class="flex-box-1-subclass" style="background-color: purple">
                 <img src="https://th.bing.com/th/id/OIP.qHE5GMBT6AdWWn60AWl5dQHaDi?w=334&h=167&c=7&r=0&o=5&dpr=1.5&pid=1.7"
@@ -1142,14 +1149,13 @@
 
 
 
-        <div class="flex-box-2">
+        <div class="flex-box-2" style="background-color: #000000;">
             <img id="detailImg"
                 src="https://th.bing.com/th/id/OIP.Nfel_u315XsQI33zXgMuyAHaEc?w=282&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7"
-                alt="food">
-            <div class="right">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea doloremque eius libero expedita, omnis
-                    modi
-                    est nihil officiis quaerat natus?</p>
+                alt="food" style="border:3px solid rgb(129, 169, 12)">
+            <div class="right" style="padding:15px ;">
+                <p id="id01" style="color: #fafafa; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 110%;">Are you tired of overspending on groceries and longing for great deals on your favorite food items? Look no further! Our cutting-edge price comparator website is here to
+                     revolutionize your shopping experience and help you save big on every purchase.Embrace the joy of finding incredible deals while enjoying delicious meals.</p>
 
                 <a class="cta" id="cta">
                     <span>Visit Site</span>
@@ -1183,15 +1189,31 @@
                 // detailImg.style.width = "100%";
                 detailImg.style.inlineSize = "40%";
                 detailImg.style.margin = "5vw";
-                if(idx==1)document.getElementById("cta").setAttribute("href","/food");
-                if(idx==2)document.getElementById("cta").setAttribute("href","/furniture");
-                if(idx==3)document.getElementById("cta").setAttribute("href","/clothes");
-                if(idx==4)document.getElementById("cta").setAttribute("href","/electronics");
+                if(idx==1)
+                {
+                    document.getElementById("cta").setAttribute("href","food");
+                    document.getElementById("id01").innerHTML = "Are you tired of overspending on groceries and longing for great deals on your favorite food items? Look no further! Our cutting-edge price comparator website is here to revolutionize your shopping experience and help you save big on every purchase.Embrace the joy of finding incredible deals while enjoying delicious meals. ";
+                }
+                if(idx==2)
+                {
+                    document.getElementById("cta").setAttribute("href","furniture");
+                    document.getElementById("id01").innerHTML = "Upgrade Your Space with the Perfect Furniture!.Discover the ultimate furniture shopping experience at [Price Comparator Website]! We're here to help you transform your home into a haven of comfort and style. Say goodbye to endless searching and hello to amazing deals on quality furniture.Upgrade your space with style and savings! ";
+                }
+                if(idx==3)
+                {
+                    document.getElementById("cta").setAttribute("href","clothes");
+                    document.getElementById("id01").innerHTML = "Looking for the hottest fashion trends without breaking the bank? Look no further! Introducing [Price Comparator Website], your ultimate destination for incredible savings on clothing and accessories. Get ready to revamp your wardrobe and elevate your style without emptying your wallet!";
+                }
+                if(idx==4)
+                {
+                    document.getElementById("cta").setAttribute("href","electronics");
+                    document.getElementById("id01").innerHTML = "Looking for the perfect electronic gadget at an unbeatable price? Your search ends here!. Visit our website today and experience the thrill of finding unbeatable deals on electronics. Whether you're a tech enthusiast, a gadget lover, or simply looking to upgrade, we've got you covered.";
+                }
             }
         </script>
 
         <div class="flex-box-3">
-            <img src="https://th.bing.com/th/id/OIP.69xsbDm-tMNIJ37k31JB4AHaNK?pid=ImgDet&rs=1" alt="background-image-1"
+            <img src="../media/bg.jpeg" alt="bg.jpeg"
                 style="height: 100%; width: 100%" />
 
             <div class="text-box-flex-3"></div>
@@ -1201,8 +1223,7 @@
             </div>
         </div>
         <div class="flex-box-3">
-            <img src="data:image/jpeg;base64,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"
-                alt="background-image-2" style="height: 100%; width: 100%" />
+            <img src="../media/bg.jpeg" alt="bg.jpeg" style="height: 100%; width: 100%" />
 
             <div class="text-box-flex-4"></div>
             <div class="img-box-flex-4">
@@ -1211,8 +1232,7 @@
             </div>
         </div>
         <div class="flex-box-3">
-            <img src="https://th.bing.com/th/id/OIP.H0SIGSTyTPLQiFsIfyvDDwHaEK?w=283&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7"
-                alt="background-image-1" style="height: 100%; width: 100%" />
+            <img src="../media/bg.jpeg" alt="bg.jpeg" style="height: 100%; width: 100%" />
 
             <div class="text-box-flex-3"></div>
             <div class="img-box-flex-3">
@@ -1235,8 +1255,8 @@
                                     Contact us
                                 </p>
                                 <p class="text-blk contactus-subhead">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna al iqua. Ut enim
+                                    If you have any questions, feedback, or suggestions, we're always here to assist you. 
+                                    We value your input and continuously strive to enhance your experience on our website.
                                 </p>
                             </div>
                             <div class="responsive-container-block">
@@ -1276,8 +1296,8 @@
                                 Contact us
                             </p>
                             <p class="text-blk contactus-subhead">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna al iqua. Ut enim
+                                If you have any questions, feedback, or suggestions, we're always here to assist you. 
+                                We value your input and continuously strive to enhance your experience on our website.
                             </p>
                         </div>
                         <div class="workik-contact-bigbox">
