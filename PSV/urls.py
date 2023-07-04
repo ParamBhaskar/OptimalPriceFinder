@@ -23,6 +23,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index, name='index'),
+    path('contact', views.contact, name="contact"),
     path('food', views.food, name= "food"),
     path('furniture', views.furniture, name= "furniture"),
     path('clothes', views.clothes, name= "clothes"),

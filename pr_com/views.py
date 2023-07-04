@@ -18,7 +18,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from scrapyd_api import ScrapydAPI
-from pr_com.models import Product, gostring
+from pr_com.models import Product
 from django.shortcuts import redirect, render, HttpResponse
 # from pr_com.utils import URLUtil
 
