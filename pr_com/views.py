@@ -285,7 +285,7 @@ def ama_discover_product_urls(url, HEADERS):
         ama_product_url = urljoin("https://www.amazon.in/", prod.get("href"))
         ama_product_urls.append(ama_product_url)
         if (total < 2):
-            URL = "https://api.scrapingdog.com/scrape?api_key=64a2938f92f9092f20d503cf&url=" + \
+            URL = "https://api.scrapingdog.com/scrape?api_key=668197f8eda9de7766e7c41d&url=" + \
                 ama_product_url+"/&dynamic=false"
             webpage = requests.get(URL, headers=HEADERS)
             soup = BeautifulSoup(webpage.content, "lxml")
@@ -352,10 +352,10 @@ def crawl2(request, stringextra):
     HEADERS = ({'User-Agent':
                 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
                 'Accept-Language': 'en-US, en;q=0.5'})
-    url = "https://api.scrapingdog.com/scrape?api_key=64a2938f92f9092f20d503cf&url=https://www.amazon.in/s?k=" + \
+    url = "https://api.scrapingdog.com/scrape?api_key=668197f8eda9de7766e7c41d&url=https://www.amazon.in/s?k=" + \
         stringextra+"&page=1/&dynamic=false"
     ama_discover_product_urls(url, HEADERS)
-    url = "https://api.scrapingdog.com/scrape?api_key=64a2938f92f9092f20d503cf&url=https://www.flipkart.com/search?q="+stringextra+"&page=1&dynamic=false"
+    url = "https://api.scrapingdog.com/scrape?api_key=668197f8eda9de7766e7c41d&url=https://www.flipkart.com/search?q="+stringextra+"&page=1&dynamic=false"
     flip_discover_product_urls(url, HEADERS)
     return redirect("/view_cart")
     # return HttpResponse("Hi")
