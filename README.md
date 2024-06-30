@@ -196,6 +196,14 @@ python manage.py runserver
 
 ###  Screenshots
 
+1. HomePage
+![image](https://github.com/ParamBhaskar/OptimalPriceFinder/assets/108367037/cfe68f04-4b07-4831-bea7-7015999d2ed6)
+2. Electronics page
+![image](https://github.com/ParamBhaskar/OptimalPriceFinder/assets/108367037/fd04c428-79d0-4031-b057-372d13c7a604)
+3. Selecting Requirements/Preferences
+![image](https://github.com/ParamBhaskar/OptimalPriceFinder/assets/108367037/b655a042-762e-4e55-a19e-60a1cb35cee2)
+4. Showing Optimal Prices Result
+![Screenshot from 2024-06-30 23-47-12](https://github.com/ParamBhaskar/OptimalPriceFinder/assets/108367037/3163edf0-4c1c-4d34-8478-7f556701d879)
 
 ---
 
